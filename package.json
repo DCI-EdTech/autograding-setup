@@ -1,0 +1,26 @@
+{
+  "name": "autograding-setup",
+  "version": "0.0.1",
+  "description": "inserts files and configuration for autograding",
+  "homepage": "https://github.com/galymax/autograding-setup",
+  "author": {
+    "name": "Maxim Werkhowski",
+    "email": "werkhowski@gmail.com",
+    "url": "https://github.com/galymax/"
+  },
+  "license": "MIT",
+  "bin": {
+    "autograding-setup": "./cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/piuccio/cowsay.git"
+  },
+  "dependencies": {
+    "get-stdin": "8.0.0",
+    "yargs": "15.4.1"
+  },
+  "engines": {
+    "node": ">= 4"
+  }
+}
