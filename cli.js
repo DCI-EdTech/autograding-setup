@@ -26,23 +26,8 @@ Object.assign(packageJson.scripts, {
   "prepare": "husky install"
 });
 
-console.log('Updating package.json scripts', JSON.stringify(packageJson, null, 2));
-
-Object.assign(packageJson.devDependencies, {
-  "eslint": "^7.32.0",
-  "eslint-config-airbnb-base": "^14.2.1",
-  "eslint-plugin-import": "^2.24.1",
-  "eslint-plugin-node": "^11.1.0",
-  "eslint-plugin-promise": "^5.1.0",
-  "husky": "^7.0.1",
-  "jest": "^26.6.3",
-  "lint-staged": "^11.1.2",
-  "rewire": "^5.0.0"
-});
-
-console.log('Updating package.json devDependencies', JSON.stringify(packageJson, null, 2));
-
 Object.assign(packageJson, {
+  "devDependencies": {},
   "jest": {
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
@@ -76,7 +61,17 @@ Object.assign(packageJson, {
   }
 });
 
-console.log('Updating package.json main', JSON.stringify(packageJson, null, 2));
+Object.assign(packageJson.devDependencies, {
+  "eslint": "^7.32.0",
+  "eslint-config-airbnb-base": "^14.2.1",
+  "eslint-plugin-import": "^2.24.1",
+  "eslint-plugin-node": "^11.1.0",
+  "eslint-plugin-promise": "^5.1.0",
+  "husky": "^7.0.1",
+  "jest": "^26.6.3",
+  "lint-staged": "^11.1.2",
+  "rewire": "^5.0.0"
+});
 
 fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
