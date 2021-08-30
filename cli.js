@@ -26,6 +26,52 @@ Object.assign(packageJson.scripts, {
   "prepare": "husky install"
 });
 
+Object.assign(packageJson.devDependencies, {
+  "eslint": "^7.32.0",
+  "eslint-config-airbnb-base": "^14.2.1",
+  "eslint-plugin-import": "^2.24.1",
+  "eslint-plugin-node": "^11.1.0",
+  "eslint-plugin-promise": "^5.1.0",
+  "husky": "^7.0.1",
+  "jest": "^26.6.3",
+  "lint-staged": "^11.1.2",
+  "rewire": "^5.0.0"
+});
+
+Object.assign(packageJson, {
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "verbose": true
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "extends": "airbnb-base",
+    "parserOptions": {
+      "ecmaVersion": 6
+    },
+    "rules": {
+      "no-console": "off",
+      "eol-last": "off",
+      "prefer-template": "off"
+    }
+  },
+  "eslintIgnore": [
+    "__tests__/*.js",
+    "jest.config.js"
+  ],
+  "lint-staged": {
+    "*.js": [
+      "npx eslint --cache"
+    ]
+  }
+});
+
 fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
 exec('git add .')
