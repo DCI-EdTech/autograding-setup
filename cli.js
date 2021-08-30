@@ -14,7 +14,8 @@ console.log('Setup autograding');
 function insertTemplateFiles() {
   console.log('Inserting autograding files');
   //fse.copySync(templateDir, root);
-  exec(`shopt -s dotglob | rsync -a ${templateDir}/. ${root}`)
+  console.log(`cp -a ${templateDir}/. ${root}`);
+  exec(`cp -a ${templateDir}/. ${root}`)
 }
 
 insertTemplateFiles();
