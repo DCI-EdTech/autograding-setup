@@ -7,7 +7,7 @@ console.log('Setup autograding');
 
 const root = path.resolve('./');
 console.log('root', root);
-const orig = process.cwd();
+const orig = path.join(__dirname, '..');
 console.log('orig', orig);
 
 // install dependencies
