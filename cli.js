@@ -21,7 +21,8 @@ insertTemplateFiles();
 
 Object.assign(packageJson.scripts, {
   "test": "jest",
-  "test:watch": "jest --watch"
+  "test:watch": "jest --watch",
+  "prepare": "husky install"
 });
 
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
