@@ -7,7 +7,8 @@ const path = require('path');
 const root = path.resolve('./');
 const orig = __dirname;
 const templateDir = path.resolve(orig, 'template');
-const packageJson = require(path.resolve(root, 'package.json'));
+const packageJsonPath = path.resolve(root, 'package.json');
+const packageJson = require(packageJsonPath);
 
 console.log('Setup autograding');
 
@@ -22,6 +23,8 @@ Object.assign(packageJson.scripts, {
   "test": "jest",
   "test:watch": "jest --watch"
 });
+
+fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
 console.log('autograding pre-setup done')
 process.exit();
