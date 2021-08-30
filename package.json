@@ -17,6 +17,7 @@
     "url": "https://github.com/piuccio/cowsay.git"
   },
   "dependencies": {
+    "fs-extra": "^10.0.0",
     "get-stdin": "8.0.0",
     "yargs": "15.4.1"
   },
