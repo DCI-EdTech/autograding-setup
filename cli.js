@@ -14,7 +14,7 @@ console.log('orig', orig);
 exec('npm install');
 
 // copy files
-fse.copySync(path.resolve(orig, 'template/testfile'), root, { overwrite: true }, function (err) {
+fse.copySync(path.resolve(orig, 'template/testfile'), path.resolve(root, 'testfile'), { overwrite: true }, function (err) {
   if (err) {                 
     console.error(err);
   } else {
