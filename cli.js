@@ -14,7 +14,7 @@ console.log('Setup autograding');
 function insertTemplateFiles() {
   console.log('Inserting autograding files');
   //fse.copySync(templateDir, root);
-  exec(`cp -r ${templateDir}/* ${root}`);
+  exec(`cp -a ${templateDir}/. ${root}`);
 }
 
 insertTemplateFiles();
