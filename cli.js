@@ -3,21 +3,21 @@ const {exec} = require('child_process');
 const fse = require('fs-extra');
 const path = require('path');
 
+const root = path.resolve('./');
+const orig = __dirname;
+const templateDir = path.resolve(orig, 'template');
+
 console.log('Setup autograding');
 
-const root = path.resolve('./');
 console.log('root', root);
-const orig = __dirname;
 console.log('orig', orig);
 
 // install dependencies
 exec('npm install');
 
-// copy files
-fse.copySync(path.resolve(orig, 'template/testfile'), path.resolve(root, 'testfile'), { overwrite: true }, function (err) {
-  if (err) {                 
-    console.error(err);
-  } else {
-    console.log("copy success!");
-  }
-});
+insertTemplateFiles();
+
+function insertTemplateFiles() {
+  console.log('Insert template files');
+  fse.copySync(templateDir, root);
+}
