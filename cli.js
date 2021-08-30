@@ -8,14 +8,14 @@ const orig = __dirname;
 const templateDir = path.resolve(orig, 'template');
 const packageJsonPath = path.resolve(root, 'package.json');
 const packageJson = require(packageJsonPath);
-const gitignore = require(path.resolve(templateDir, 'gitignore'));
 
 console.log('Setup autograding');
 
 function insertTemplateFiles() {
   console.log('Inserting autograding files');
-  fse.copySync(templateDir, root);
-  fse.writeFileSync(path.resolve(root, '.gitignore'), gitignore);
+  fse.copySync(templateDir, root, {
+    filter: () => true,
+  });
 }
 
 insertTemplateFiles();
