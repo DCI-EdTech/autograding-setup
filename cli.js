@@ -16,12 +16,8 @@ console.log('orig', orig);
 exec('npm install');
 
 function insertTemplateFiles() {
-  const files = fse.readdirSync(templateDir);
-  files.forEach(file => {
-    const origFile = path.resolve(templateDir, file);
-    const destFile = path.resolve(root, file);
-    fse.copySync(origFile, destFile);
-  });
+  console.log('Inserting template files');
+  fse.copySync(templateDir, root);
 }
 
 insertTemplateFiles();
