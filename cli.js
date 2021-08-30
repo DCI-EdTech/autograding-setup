@@ -14,8 +14,11 @@ console.log('Setup autograding');
 
 function insertTemplateFiles() {
   console.log('Inserting autograding files');
+  const gitignorePath = path.resolve(templateDir, '.gitignore');
   fse.copySync(templateDir, root);
+  fse.copySync(gitignorePath, path.resolve(root, '.gitignore'));
 }
+// gitignore is not inserted
 
 insertTemplateFiles();
 
