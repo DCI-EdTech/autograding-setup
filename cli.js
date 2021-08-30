@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 const {exec} = require('child_process');
-const fs = require('fs');
 const fse = require('fs-extra');
 const path = require('path');
 
@@ -9,7 +8,7 @@ const orig = __dirname;
 const templateDir = path.resolve(orig, 'template');
 const packageJsonPath = path.resolve(root, 'package.json');
 const packageJson = require(packageJsonPath);
-const gitignore = require(path.resolve(templateDir, '.gitignore'));
+const gitignore = require(path.resolve(templateDir, 'gitignore'));
 
 console.log('Setup autograding');
 
