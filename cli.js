@@ -26,6 +26,8 @@ Object.assign(packageJson.scripts, {
   "prepare": "husky install"
 });
 
+console.log('Updating package.json scripts', JSON.stringify(packageJson, null, 2));
+
 Object.assign(packageJson.devDependencies, {
   "eslint": "^7.32.0",
   "eslint-config-airbnb-base": "^14.2.1",
@@ -37,6 +39,8 @@ Object.assign(packageJson.devDependencies, {
   "lint-staged": "^11.1.2",
   "rewire": "^5.0.0"
 });
+
+console.log('Updating package.json devDependencies', JSON.stringify(packageJson, null, 2));
 
 Object.assign(packageJson, {
   "jest": {
@@ -71,6 +75,8 @@ Object.assign(packageJson, {
     ]
   }
 });
+
+console.log('Updating package.json main', JSON.stringify(packageJson, null, 2));
 
 fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
