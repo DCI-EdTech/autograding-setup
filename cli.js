@@ -16,4 +16,5 @@ function insertTemplateFiles() {
 
 insertTemplateFiles();
 
+console.log('done')
 process.exit();
