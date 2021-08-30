@@ -13,9 +13,9 @@ console.log('Setup autograding');
 
 function insertTemplateFiles() {
   console.log('Inserting autograding files');
-  //fse.copySync(templateDir, root);
-  console.log(`cp -a ${templateDir}/. ${root}`);
-  exec(`cp -a ${templateDir}/. ${root}`)
+  fse.copySync(templateDir, root);
+  // .gitignore needs to be generated because of a bug in npm v7 https://github.com/npm/cli/issues/2144
+  fse.writeFileSync(path.resolve(root, '.gitignore'), 'node_modules\n.vscode\n.eslintcache');
 }
 
 insertTemplateFiles();
