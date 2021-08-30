@@ -28,5 +28,7 @@ Object.assign(packageJson.scripts, {
 
 fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
+exec('git add .')
+
 console.log('autograding pre-setup done')
 process.exit();
