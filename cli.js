@@ -13,9 +13,8 @@ console.log('Setup autograding');
 
 function insertTemplateFiles() {
   console.log('Inserting autograding files');
-  fse.copySync(templateDir, root, {
-    filter: () => true,
-  });
+  fse.copySync(templateDir, root);
+  fse.copyFileSync(path.resolve(templateDir, '.gitignore'), path.resolve(root, '.gitignore'));
 }
 
 insertTemplateFiles();
