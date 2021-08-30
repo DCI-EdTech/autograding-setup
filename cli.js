@@ -7,12 +7,14 @@ console.log('Setup autograding');
 
 const root = path.resolve('./');
 console.log('root', root);
+const orig = process.cwd();
+console.log('orig', orig);
 
 // install dependencies
 exec('npm install');
 
 // copy files
-fse.copySync('./template/testfile', root, { overwrite: true }, function (err) {
+fse.copySync(path.resolve(orig, 'template/testfile'), root, { overwrite: true }, function (err) {
   if (err) {                 
     console.error(err);
   } else {
