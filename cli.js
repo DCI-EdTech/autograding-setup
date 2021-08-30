@@ -9,16 +9,15 @@ const orig = __dirname;
 const templateDir = path.resolve(orig, 'template');
 const packageJsonPath = path.resolve(root, 'package.json');
 const packageJson = require(packageJsonPath);
+const gitignore = require(path.resolve(templateDir, '.gitignore'));
 
 console.log('Setup autograding');
 
 function insertTemplateFiles() {
   console.log('Inserting autograding files');
-  const gitignorePath = path.resolve(templateDir, '.gitignore');
   fse.copySync(templateDir, root);
-  fse.copySync(gitignorePath, path.resolve(root, '.gitignore'));
+  fse.writeFileSync(path.resolve(root, '.gitignore'), gitignore);
 }
-// gitignore is not inserted
 
 insertTemplateFiles();
 
@@ -28,7 +27,7 @@ Object.assign(packageJson.scripts, {
   "prepare": "husky install"
 });
 
-fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
 console.log('autograding pre-setup done')
 process.exit();
