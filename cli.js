@@ -8,6 +8,7 @@ const orig = __dirname;
 const templateDir = path.resolve(orig, 'template');
 const packageJsonPath = path.resolve(root, 'package.json');
 const packageJson = require(packageJsonPath);
+const testsDir = path.resolve(root, '__tests__')
 
 console.log('Setup autograding');
 
@@ -20,15 +21,14 @@ function insertTemplateFiles() {
 
 function generateAutogradingJSON() {
   // read test folder contents  
-  const testDir = path.resolve(root, '__tests__');
-  const testFiles = fse.readdirSync(testDir);
+  const testFiles = fse.readdirSync(testsDir);
   // filer autograding test files
   const autogradingTests = testFiles.reduce((acc, file) => {
     const taskName = path.basename(file).match(/^tasks\.(.*)\.js$/)[1];
     if(taskName) acc.push({
       "name": `Task ${taskName}`,
       "setup": "npm install --ignore-scripts",
-      "run": `npm test -- ${file}`,
+      "run": `npm test -- ${path.resolve(testsDir, file)}`,
       "timeout": 10,
       "points": 10
     })
