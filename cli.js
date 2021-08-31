@@ -44,7 +44,7 @@ function generateAutogradingJSON() {
 }
 
 function addPointsBadgeToReadme() {
-  const readme = fse.readFileSync(readmePath, 'utf8')
+  let readme = fse.readFileSync(readmePath, 'utf8')
   // remove badge line
   readme = readme.replace(/\!\[Points badge\]\(.*[\n\r]*/, '')
   // insert badge line
