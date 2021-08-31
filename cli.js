@@ -10,7 +10,7 @@ const packageJsonPath = path.resolve(root, 'package.json');
 const readmePath = path.resolve(root, 'README.md');
 const packageJson = require(packageJsonPath);
 const testsDir = '__tests__';
-const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)\n\r\n\r`;
+const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)\n\r`;
 
 console.log('Setup autograding');
 
