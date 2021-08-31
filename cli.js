@@ -7,8 +7,10 @@ const root = path.resolve('./');
 const orig = __dirname;
 const templateDir = path.resolve(orig, 'template');
 const packageJsonPath = path.resolve(root, 'package.json');
+const readmePath = path.resolve(root, 'README.md');
 const packageJson = require(packageJsonPath);
 const testsDir = '__tests__';
+const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)\n\r\n\r`;
 
 console.log('Setup autograding');
 
@@ -42,8 +44,17 @@ function generateAutogradingJSON() {
   fse.outputFileSync(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
 }
 
+function addPointsBadgeToReadme() {
+  const readme = fse.readFileSync(readmePath)
+  // remove badge line
+  readme.replace(/\!\[Points badge\]\(.*[\n\r]*/, '')
+  // insert badge line
+  fse.writeFileSync(readmePath, `${pointsBadgeString}${readme}`);
+}
+
 insertTemplateFiles();
 generateAutogradingJSON();
+addPointsBadgeToReadme();
 
 Object.assign(packageJson.scripts, {
   "test": "jest",
