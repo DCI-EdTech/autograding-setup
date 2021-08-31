@@ -33,7 +33,7 @@ function generateAutogradingJSON() {
       "timeout": 10,
       "points": 10
     })
-    //return acc;
+    return acc;
   }, [])
   console.log('tests', autogradingTests)
   const autogradingJSON = {
