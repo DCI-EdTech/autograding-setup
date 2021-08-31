@@ -39,7 +39,7 @@ function generateAutogradingJSON() {
     tests: autogradingTests
   };
   console.log('create autograding file', path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2))
-  fse.outputFile(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
+  fse.outputFileSync(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
 }
 
 insertTemplateFiles();
