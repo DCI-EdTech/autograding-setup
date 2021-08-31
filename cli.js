@@ -22,6 +22,7 @@ function generateAutogradingJSON() {
   // read test folder contents  
   const testDir = path.resolve(root, '__tests__');
   const testFiles = fse.readdirSync(testDir);
+  console.log('files', testFiles)
   // filer autograding test files
   const autogradingTestFiles = testFiles.filter(file => /^tasks\.*\.js$/.test(path.basename(file)))
   console.log('test files', autogradingTestFiles)
@@ -36,7 +37,7 @@ function generateAutogradingJSON() {
       }
     })
   }
-  fse.writeFileSync(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
+  fse.outputFile(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
 }
 
 insertTemplateFiles();
