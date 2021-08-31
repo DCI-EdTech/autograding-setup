@@ -22,7 +22,6 @@ function generateAutogradingJSON() {
   // read test folder contents  
   const testDir = path.resolve(root, '__tests__');
   const testFiles = fse.readdirSync(testDir);
-  console.log('files', testFiles);
   // filer autograding test files
   const autogradingTests = testFiles.reduce((acc, file) => {
     const taskName = path.basename(file).match(/^tasks\.(.*)\.js$/)[0];
@@ -35,10 +34,10 @@ function generateAutogradingJSON() {
     })
     return acc;
   }, [])
-  console.log('tests', autogradingTests)
   const autogradingJSON = {
     tests: autogradingTests
   };
+  console.log('create autograding file', path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2))
   fse.outputFile(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
 }
 
