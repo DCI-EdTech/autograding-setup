@@ -50,7 +50,8 @@
           # make dir for badges
           - name: badges branch and make dir
             run: |
-              git checkout badges || git checkout -b badges
+              git checkout -b --orphan badges
+              git rm -rf .
               mkdir -p .github/badges
 
           # make points badge
