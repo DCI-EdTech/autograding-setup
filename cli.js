@@ -24,7 +24,7 @@ function generateAutogradingJSON() {
   const testFiles = fse.readdirSync(testDir);
   console.log('files', testFiles);
   // filer autograding test files
-  const autogradingTests = testFiles.reduce(acc, file => {
+  const autogradingTests = testFiles.reduce((acc, file) => {
     const taskName = path.basename(file).match(/^tasks\.(.*)\.js$/)[0];
     if(taskName) acc.push({
       "name": `Task ${taskName}`,
