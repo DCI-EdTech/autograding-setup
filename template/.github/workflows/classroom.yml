@@ -20,7 +20,7 @@
           - name: Get changed files
             id: changes
             run: |
-              echo "::set-output name=grading::$(git diff `git log -1 --pretty=format:"%h" --diff-filter=A -- .github/workflows/classroom.yml | tail -n 1` HEAD --name-only -- __tests__/tasks.*.js .github/workflows/classroom.yml .github/classroom/autograding.json | xargs)"
+              echo "::set-output name=grading::$(git diff `git rev-list HEAD | tail -n 1` HEAD --name-only -- __tests__/tasks.*.js | xargs)"
           - name: check permission to proceed
             id: proceed
             run: |
