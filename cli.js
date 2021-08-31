@@ -18,7 +18,29 @@ function insertTemplateFiles() {
   fse.writeFileSync(path.resolve(root, '.gitignore'), 'node_modules\n.vscode\n.eslintcache');
 }
 
+function generateAutogradingJSON() {
+  // read test folder contents  
+  const testDir = path.resolve(root, '__tests__');
+  const testFiles = fse.readdirSync(testDir);
+  // filer autograding test files
+  const autogradingTestFiles = testFiles.filter(file => /^tasks\.*\.js$/.test(path.basename(file)))
+  console.log('test files', autogradingTestFiles)
+  const autogradingJSON = {
+    tests: autogradingTestFiles.map(file => {
+      return {
+        "name": `Task ${path.basename(file).match(/^tasks\.(.*)\.js$/)[0]}`,
+        "setup": "npm install --ignore-scripts",
+        "run": `npm test -- ${file}`,
+        "timeout": 10,
+        "points": 10
+      }
+    })
+  }
+  fse.writeFileSync(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
+}
+
 insertTemplateFiles();
+generateAutogradingJSON();
 
 Object.assign(packageJson.scripts, {
   "test": "jest",
