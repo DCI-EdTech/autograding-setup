@@ -22,9 +22,13 @@ function generateAutogradingJSON() {
   // read test folder contents  
   const testDir = path.resolve(root, '__tests__');
   const testFiles = fse.readdirSync(testDir);
-  console.log('files', testFiles)
+  console.log('files', testFiles);
   // filer autograding test files
-  const autogradingTestFiles = testFiles.filter(file => /^tasks\.*\.js$/.test(path.basename(file)))
+  const autogradingTestFiles = testFiles.filter(file => {
+    const include = /^tasks\.*\.js$/.test(path.basename(file));
+    console.log("file", file, include);
+    return include;
+  })
   console.log('test files', autogradingTestFiles)
   const autogradingJSON = {
     tests: autogradingTestFiles.map(file => {
