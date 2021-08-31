@@ -29,7 +29,7 @@ function generateAutogradingJSON() {
     if(taskName) acc.push({
       "name": `Task ${taskName}`,
       "setup": "npm install --ignore-scripts",
-      "run": `npm test -- ${path.resolve(testsDir, file)}`,
+      "run": `npm test -- ${testsDir}/${file}`,
       "timeout": 10,
       "points": 10
     })
