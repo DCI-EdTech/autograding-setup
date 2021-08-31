@@ -24,23 +24,21 @@ function generateAutogradingJSON() {
   const testFiles = fse.readdirSync(testDir);
   console.log('files', testFiles);
   // filer autograding test files
-  const autogradingTestFiles = testFiles.filter(file => {
-    const include = /^tasks\.*\.js$/.test(path.basename(file));
-    console.log("file", path.basename(file), include);
-    return include;
-  })
-  console.log('test files', autogradingTestFiles)
-  const autogradingJSON = {
-    tests: autogradingTestFiles.map(file => {
-      return {
-        "name": `Task ${path.basename(file).match(/^tasks\.(.*)\.js$/)[0]}`,
-        "setup": "npm install --ignore-scripts",
-        "run": `npm test -- ${file}`,
-        "timeout": 10,
-        "points": 10
-      }
+  const autogradingTests = testFiles.reduce(acc, file => {
+    const taskName = path.basename(file).match(/^tasks\.(.*)\.js$/)[0];
+    if(taskName) acc.push({
+      "name": `Task ${taskName}`,
+      "setup": "npm install --ignore-scripts",
+      "run": `npm test -- ${file}`,
+      "timeout": 10,
+      "points": 10
     })
-  }
+    //return acc;
+  }, [])
+  console.log('tests', autogradingTests)
+  const autogradingJSON = {
+    tests: autogradingTests
+  };
   fse.outputFile(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
 }
 
