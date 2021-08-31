@@ -26,7 +26,7 @@ function generateAutogradingJSON() {
   // filer autograding test files
   const autogradingTestFiles = testFiles.filter(file => {
     const include = /^tasks\.*\.js$/.test(path.basename(file));
-    console.log("file", file, include);
+    console.log("file", path.basename(file), include);
     return include;
   })
   console.log('test files', autogradingTestFiles)
