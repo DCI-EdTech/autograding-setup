@@ -110,7 +110,7 @@ Object.assign(packageJson.devDependencies, {
 
 fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
-exec('git add .')
+exec('git add . && git commit -m "added autograding setup"')
 
 console.log('autograding pre-setup done')
 process.exit();
