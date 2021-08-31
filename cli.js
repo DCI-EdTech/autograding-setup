@@ -40,12 +40,11 @@ function generateAutogradingJSON() {
   const autogradingJSON = {
     tests: autogradingTests
   };
-  console.log('create autograding file', path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2))
   fse.outputFileSync(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
 }
 
 function addPointsBadgeToReadme() {
-  const readme = fse.readFileSync(readmePath)
+  const readme = JSON.parse(fse.readFileSync(readmePath))
   // remove badge line
   readme.replace(/\!\[Points badge\]\(.*[\n\r]*/, '')
   // insert badge line
