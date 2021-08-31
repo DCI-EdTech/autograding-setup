@@ -24,7 +24,7 @@ function generateAutogradingJSON() {
   const testFiles = fse.readdirSync(testDir);
   // filer autograding test files
   const autogradingTests = testFiles.reduce((acc, file) => {
-    const taskName = path.basename(file).match(/^tasks\.(.*)\.js$/)[0];
+    const taskName = path.basename(file).match(/^tasks\.(.*)\.js$/)[1];
     if(taskName) acc.push({
       "name": `Task ${taskName}`,
       "setup": "npm install --ignore-scripts",
