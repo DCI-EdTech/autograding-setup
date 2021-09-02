@@ -12,15 +12,16 @@ Script to insert all files and configuration for autograding into exercise repos
 ## What it does
 ### Inserted files
 ```
-.gitignore
-.husky
-|   pre-commit
-.github
-|___classroom
-|   |   autograding.json
-|___workflows
-|   |   classroom.yml
-|   .keep
+|
+|   .gitignore
+|___.husky
+|   |    pre-commit
+|___.github
+    |___classroom
+    |   |   autograding.json
+    |___workflows
+    |   |   classroom.yml
+    |   .keep
 ```
 ### Generated and modified files
 - **.github/classroom/autograding.json** is generated based on the matching test files in **__tests__**
