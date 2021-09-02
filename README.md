@@ -24,7 +24,7 @@ Script to insert all files and configuration for autograding into exercise repos
     |   .keep
 ```
 ### Generated and modified files
-- **.github/classroom/autograding.json** is generated based on the matching test files in **`__tests__`**
+- **.github/classroom/autograding.json** is generated based on the [matching](#requirements-for-target-repos) test files in **`__tests__`**
 - **package.json** is expanded with
   - devDependencies
   - `prepare` script: `husky install`
