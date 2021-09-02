@@ -1,7 +1,7 @@
 # autograding-setup
 Script to insert all files and configuration for autograding into exercise repositories
 ## Requirements for target repos
-- Test files need to be in **__tests__** directory
+- Test files need to be in **`__tests__`** directory
 - To be used for autograding test file names need to match the glob pattern `tasks.*.js` i.e. `tasks.1.js`
 - The **package.json** needs to have
 ```
@@ -24,7 +24,7 @@ Script to insert all files and configuration for autograding into exercise repos
     |   .keep
 ```
 ### Generated and modified files
-- **.github/classroom/autograding.json** is generated based on the matching test files in **__tests__**
+- **.github/classroom/autograding.json** is generated based on the matching test files in **`__tests__`**
 - **package.json** is expanded with
   - devDependencies
   - `prepare` script: `husky install`
