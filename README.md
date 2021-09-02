@@ -32,6 +32,6 @@ Script to insert all files and configuration for autograding into exercise repos
   - eslint settings
   - jest settings
 - **README.md** receives a line to include the result score of the autograding
-### Commands executed
+### Commands executed during installation
 - `husky install`
 - `git add . && git commit -m "added autograding setup"`
