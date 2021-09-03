@@ -1,6 +1,6 @@
 # autograding-setup
 Script to insert all files and configuration for autograding into exercise repositories
-## Requirements for target repos
+## Requirements for target repos (usage)
 - Test files need to be in **`__tests__`** directory
 - To be used for autograding test file names need to match the glob pattern `tasks.*.js` i.e. `tasks.1.js`
 - The **package.json** needs to have
