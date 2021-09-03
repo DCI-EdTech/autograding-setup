@@ -8,6 +8,7 @@ const orig = __dirname;
 const templateDir = path.resolve(orig, 'template');
 const packageJsonPath = path.resolve(root, 'package.json');
 const readmePath = path.resolve(root, 'README.md');
+const autogradingReadmePath = path.resolve(root, 'AUTOGRADING.md');
 const packageJson = require(packageJsonPath);
 const testsDir = '__tests__';
 const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)\n\r`;
@@ -43,73 +44,76 @@ function generateAutogradingJSON() {
   fse.outputFileSync(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
 }
 
-function addPointsBadgeToReadme() {
+function modifyReadme() {
+  const autogradingReadme = fse.readFileSync(autogradingReadmePath, 'utf8');
   let readme = fse.readFileSync(readmePath, 'utf8')
   // remove badge line
   readme = readme.replace(/\!\[Points badge\]\(.*[\n\r]*/g, '')
   // insert badge line
-  fse.writeFileSync(readmePath, `${pointsBadgeString}${readme}`);
+  fse.writeFileSync(readmePath, `${pointsBadgeString}${readme}\n\r${autogradingReadme}`);
+}
+
+function modifyPackageJson() {
+  Object.assign(packageJson.scripts, {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "prepare": "husky install"
+  });
+  
+  Object.assign(packageJson, {
+    "devDependencies": {},
+    "jest": {
+      "testEnvironment": "node",
+      "coveragePathIgnorePatterns": [
+        "/node_modules/"
+      ],
+      "verbose": true
+    },
+    "eslintConfig": {
+      "env": {
+        "es6": true,
+        "node": true
+      },
+      "extends": "airbnb-base",
+      "parserOptions": {
+        "ecmaVersion": 6
+      },
+      "rules": {
+        "no-console": "off",
+        "eol-last": "off",
+        "prefer-template": "off"
+      }
+    },
+    "eslintIgnore": [
+      "__tests__/*.js",
+      "jest.config.js"
+    ],
+    "lint-staged": {
+      "*.js": [
+        "npx eslint --cache"
+      ]
+    }
+  });
+  
+  Object.assign(packageJson.devDependencies, {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "husky": "^7.0.1",
+    "jest": "^26.6.3",
+    "lint-staged": "^11.1.2",
+    "rewire": "^5.0.0"
+  });
+  
+  fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 }
 
 insertTemplateFiles();
 generateAutogradingJSON();
-addPointsBadgeToReadme();
-
-Object.assign(packageJson.scripts, {
-  "test": "jest",
-  "test:watch": "jest --watch",
-  "prepare": "husky install"
-});
-
-Object.assign(packageJson, {
-  "devDependencies": {},
-  "jest": {
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/"
-    ],
-    "verbose": true
-  },
-  "eslintConfig": {
-    "env": {
-      "es6": true,
-      "node": true
-    },
-    "extends": "airbnb-base",
-    "parserOptions": {
-      "ecmaVersion": 6
-    },
-    "rules": {
-      "no-console": "off",
-      "eol-last": "off",
-      "prefer-template": "off"
-    }
-  },
-  "eslintIgnore": [
-    "__tests__/*.js",
-    "jest.config.js"
-  ],
-  "lint-staged": {
-    "*.js": [
-      "npx eslint --cache"
-    ]
-  }
-});
-
-Object.assign(packageJson.devDependencies, {
-  "eslint": "^7.32.0",
-  "eslint-config-airbnb-base": "^14.2.1",
-  "eslint-plugin-import": "^2.24.1",
-  "eslint-plugin-node": "^11.1.0",
-  "eslint-plugin-promise": "^5.1.0",
-  "husky": "^7.0.1",
-  "jest": "^26.6.3",
-  "lint-staged": "^11.1.2",
-  "rewire": "^5.0.0"
-});
-
-fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-
+modifyReadme();
+modifyPackageJson();
 exec('git add . && git commit -m "added autograding setup"')
 
 console.log('autograding pre-setup done')
