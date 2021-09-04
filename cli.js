@@ -9,6 +9,7 @@ const templateDir = path.resolve(orig, 'template');
 const packageJsonPath = path.resolve(root, 'package.json');
 const readmePath = path.resolve(root, 'README.md');
 const autogradingReadmePath = path.resolve(root, 'AUTOGRADING.md');
+const readmeInfoDelimiters = ['[//]: # (autograding info start)', '[//]: # (autograding info end)'];
 const packageJson = require(packageJsonPath);
 const testsDir = '__tests__';
 const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)\n\r`;
@@ -47,10 +48,13 @@ function generateAutogradingJSON() {
 function modifyReadme() {
   const autogradingReadme = fse.readFileSync(autogradingReadmePath, 'utf8');
   let readme = fse.readFileSync(readmePath, 'utf8')
+  //const re = new RegExp(`\\b${replaceThis}\\b`, 'gi');
   // remove badge line
   readme = readme.replace(/\!\[Points badge\]\(.*[\n\r]*/g, '')
-  // insert badge line
-  fse.writeFileSync(readmePath, `${pointsBadgeString}${readme}\n\r${autogradingReadme}`);
+  // remove autograding info
+  readme = readme.replace(/^${readmeInfoDelimiters[0]}(.*)readmeInfoDelimiters[1]/g, '')
+  // insert badge line and autograding info
+  fse.writeFileSync(readmePath, `${pointsBadgeString}${readme}\n\r${readmeInfoDelimiters[0]}${autogradingReadme}${readmeInfoDelimiters[1]}`);
 }
 
 function modifyPackageJson() {
