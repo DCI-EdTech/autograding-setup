@@ -52,7 +52,7 @@ function modifyReadme() {
   // remove badge line
   readme = readme.replace(/\!\[Points badge\]\(.*[\n\r]*/g, '')
   // remove autograding info
-  readme = readme.replace(/^${readmeInfoDelimiters[0]}(.*)readmeInfoDelimiters[1]/g, '')
+  readme = readme.replace(/^${readmeInfoDelimiters[0]}(.*)${readmeInfoDelimiters[1]}/g, '')
   // insert badge line and autograding info
   fse.writeFileSync(readmePath, `${pointsBadgeString}${readme}\n\r${readmeInfoDelimiters[0]}${autogradingReadme}${readmeInfoDelimiters[1]}`);
 }
