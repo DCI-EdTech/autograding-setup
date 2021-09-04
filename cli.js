@@ -48,12 +48,11 @@ function generateAutogradingJSON() {
 function modifyReadme() {
   const autogradingReadme = fse.readFileSync(autogradingReadmePath, 'utf8');
   let readme = fse.readFileSync(readmePath, 'utf8')
-  //const re = new RegExp(`\\b${replaceThis}\\b`, 'gi');
+  const re = new RegExp(`${readmeInfoDelimiters[0]}(.*)${readmeInfoDelimiters[1]}`, 'g');
   // remove badge line
   readme = readme.replace(/\!\[Points badge\]\(.*[\n\r]*/g, '')
   // remove autograding info
-  console.log("rdm", readme.match(/${readmeInfoDelimiters[0]}(.*)${readmeInfoDelimiters[1]}/g)[0])
-  readme = readme.replace(/^${readmeInfoDelimiters[0]}(.*)${readmeInfoDelimiters[1]}/g, '')
+  readme = readme.replace(re, '')
   // insert badge line and autograding info
   fse.writeFileSync(readmePath, `${pointsBadgeString}${readme}\n\r${readmeInfoDelimiters[0]}${autogradingReadme}${readmeInfoDelimiters[1]}`);
 }
