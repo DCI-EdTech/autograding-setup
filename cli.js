@@ -11,7 +11,7 @@ const readmePath = path.resolve(root, 'README.md');
 const autogradingReadmePath = path.resolve(orig, 'AUTOGRADING.md');
 const readmeInfoDelimiters = ['[//]: # (autograding info start)', '[//]: # (autograding info end)'];
 const packageJson = require(packageJsonPath);
-const { modifyReadme } = require(path.resolve(orig, './scripts/modifyReadme'))
+const { modifyReadme } = require(path.resolve(orig, 'scripts/modifyReadme'))
 const testsDir = '__tests__';
 const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)\n\r`;
 
