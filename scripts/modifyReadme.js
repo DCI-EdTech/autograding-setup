@@ -1,5 +1,5 @@
 const fse = require('fs-extra');
-const {escapeRegExp} = require('./lib/helpers')
+const {escapeRegExp} = require('../lib/helpers')
 
 module.exports = function modifyReadme(readmePath, readmeInfoPath, delimiters) {
   const readmeInfo = fse.readFileSync(readmeInfoPath, 'utf8');
