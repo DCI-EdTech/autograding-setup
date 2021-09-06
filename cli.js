@@ -48,7 +48,7 @@ function modifyPackageJson() {
   Object.assign(packageJson.scripts, {
     "test": "jest",
     "test:watch": "jest --watch",
-    "prepare": "husky install"
+    "prepare": "npx husky install"
   });
   
   Object.assign(packageJson, {
