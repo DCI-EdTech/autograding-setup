@@ -9,6 +9,9 @@
     "url": "https://github.com/galymax/"
   },
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
   "bin": {
     "autograding-setup": "./cli.js"
   },
@@ -23,5 +26,8 @@
   },
   "engines": {
     "node": ">= 4"
+  },
+  "devDependencies": {
+    "jest": "^27.1.0"
   }
 }

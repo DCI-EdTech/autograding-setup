@@ -9,11 +9,9 @@ const templateDir = path.resolve(orig, 'template');
 const packageJsonPath = path.resolve(root, 'package.json');
 const readmePath = path.resolve(root, 'README.md');
 const autogradingReadmePath = path.resolve(orig, 'AUTOGRADING.md');
-const readmeInfoDelimiters = ['[//]: # (autograding info start)', '[//]: # (autograding info end)'];
 const packageJson = require(packageJsonPath);
 const { modifyReadme } = require(path.resolve(orig, 'scripts/modifyReadme'))
 const testsDir = '__tests__';
-const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)\n\r`;
 
 console.log('Setup autograding');
 
@@ -105,7 +103,7 @@ function modifyPackageJson() {
 
 insertTemplateFiles();
 generateAutogradingJSON();
-modifyReadme(readmePath, autogradingReadmePath, readmeInfoDelimiters);
+modifyReadme(readmePath, autogradingReadmePath);
 modifyPackageJson();
 exec('git add . && git commit -m "added autograding setup"')
 
