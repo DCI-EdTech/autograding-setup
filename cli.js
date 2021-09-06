@@ -2,7 +2,7 @@
 const { exec } = require('child_process');
 const fse = require('fs-extra');
 const path = require('path');
-const { modifyReadme } = require('./scripts/modifyReadme')
+const { modifyReadme } = require(path.resolve(orig, './scripts/modifyReadme'))
 
 const root = path.resolve('./');
 const orig = __dirname;
