@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-const {exec} = require('child_process');
+const { exec } = require('child_process');
 const fse = require('fs-extra');
 const path = require('path');
+const { modifyReadme } = require('./scripts/modifyReadme')
 
 const root = path.resolve('./');
 const orig = __dirname;
@@ -43,19 +44,6 @@ function generateAutogradingJSON() {
     tests: autogradingTests
   };
   fse.outputFileSync(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
-}
-
-function modifyReadme() {
-  const autogradingReadme = fse.readFileSync(autogradingReadmePath, 'utf8');
-  let readme = fse.readFileSync(readmePath, 'utf8')
-  const re = new RegExp(`${readmeInfoDelimiters[0]}(.*)${readmeInfoDelimiters[1]}`, 'g');
-  // remove badge line
-  readme = readme.replace(/\!\[Points badge\]\(.*[\n\r]*/g, '')
-  // remove autograding info
-  console.log(readme.match(re))
-  readme = readme.replace(re, '')
-  // insert badge line and autograding info
-  fse.writeFileSync(readmePath, `${pointsBadgeString}${readme}\n\r${readmeInfoDelimiters[0]}${autogradingReadme}${readmeInfoDelimiters[1]}`);
 }
 
 function modifyPackageJson() {
@@ -117,7 +105,7 @@ function modifyPackageJson() {
 
 insertTemplateFiles();
 generateAutogradingJSON();
-modifyReadme();
+modifyReadme(readmePath, autogradingReadmePath, readmeInfoDelimiters);
 modifyPackageJson();
 exec('git add . && git commit -m "added autograding setup"')
 
