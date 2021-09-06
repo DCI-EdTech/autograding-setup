@@ -20,8 +20,7 @@ Work in the file `solution.js`
 4. Make a profile of yourself. Store all the information in additional variables. To the existing ones `firstName` and `lastName` add `city`, `job` and `age`. Console log the variables in the order firstName, lastName, age, city, job. 
 
 5. Print a sentence using all the profile variables above, adding text for sentence flow in the following format: "John Smith is a 43 year old teacher who lives in Berlin". Replace parts of this string with your variables. **you can combine variables with text in the console by using the plus symbol (+) e.g. console.log("this is a " + variable);**
-
-[//]: # (autograding info start)
+[//]: # (autograding info start)
 ## Code style
 This exercise will automatically check if your code complies with the [Airbnb Style Guide](https://github.com/airbnb/javascript). You will not be able to commit if it doesn't.
 
