@@ -7,7 +7,7 @@ const delimiters = ['\n[//]: # (autograding info start)\n', '\n\r[//]: # (autogr
 exports.modifyReadme = function (readmePath, readmeInfoPath) {
   const readmeInfo = fse.readFileSync(readmeInfoPath, 'utf8');
   let readme = fse.readFileSync(readmePath, 'utf8')
-  const re = new RegExp(`[\n\r]*${escapeRegExp(delimiters[0])}(.*)${escapeRegExp(delimiters[1])}`, 'gsm');
+  const re = new RegExp(`[\n\r]*${escapeRegExp(delimiters[0])}([.\n\r]*)${escapeRegExp(delimiters[1])}`, 'gsm');
   console.log('re', re)
   // remove badge line
   readme = readme.replace(/\!\[Points badge\]\(.*[\n\r]*/g, '')
