@@ -2,6 +2,9 @@
 const { exec } = require('child_process');
 const fse = require('fs-extra');
 const path = require('path');
+const yargs = require('yargs/yargs').boolean(['dev'])
+const { hideBin } = require('yargs/helpers')
+const argv = yargs(hideBin(process.argv)).argv
 
 const root = path.resolve('./');
 const orig = __dirname;
@@ -12,12 +15,14 @@ const autogradingReadmePath = path.resolve(orig, 'AUTOGRADING.md');
 const packageJson = require(packageJsonPath);
 const { modifyReadme } = require(path.resolve(orig, 'scripts/modifyReadme'))
 const testsDir = '__tests__';
+const devMode = argv.dev;
 
 console.log('Setup autograding');
+if(devMode) console.log('DEV mode')
 
 function insertTemplateFiles() {
   console.log('Inserting autograding files');
-  fse.copySync(templateDir, root);
+  if(!devMode) fse.copySync(templateDir, root);
   // .gitignore needs to be generated because of a bug in npm v7 https://github.com/npm/cli/issues/2144
   fse.writeFileSync(path.resolve(root, '.gitignore'), 'node_modules\n.vscode\n.eslintcache');
 }
@@ -45,11 +50,20 @@ function generateAutogradingJSON() {
 }
 
 function modifyPackageJson() {
+  let originalPackageJson
+  Object.assign(originalPackageJson, packageJson) 
   Object.assign(packageJson.scripts, {
     "test": "jest",
     "test:watch": "jest --watch",
     "prepare": "npx husky install"
   });
+
+  // if devMode set up script to restore original packageJson
+  if(devMode) {
+    Object.assign(packageJson.scripts, {
+      "postinstall": `echo '${JSON.stringify(originalPackageJson)}' > 'package.json'`
+    });
+  }
   
   Object.assign(packageJson, {
     "devDependencies": {},
@@ -102,10 +116,12 @@ function modifyPackageJson() {
 }
 
 insertTemplateFiles();
-generateAutogradingJSON();
-modifyReadme(readmePath, autogradingReadmePath);
 modifyPackageJson();
-exec('git add . && git commit -m "added autograding setup"')
+if(!devMode) {
+  generateAutogradingJSON();
+  modifyReadme(readmePath, autogradingReadmePath);
+  exec('git add . && git commit -m "added autograding setup"')
+}
 
 console.log('autograding pre-setup done')
 process.exit();
