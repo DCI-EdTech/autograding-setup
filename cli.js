@@ -3,29 +3,25 @@ const { exec } = require('child_process');
 const fse = require('fs-extra');
 const path = require('path');
 
-const root = path.resolve('./');
-const orig = __dirname;
-const argv = require(path.resolve(orig, 'lib/yargs'))
-const templateDir = path.resolve(orig, 'template');
-const packageJsonPath = path.resolve(root, 'package.json');
-const readmePath = path.resolve(root, 'README.md');
-const autogradingReadmePath = path.resolve(orig, 'AUTOGRADING.md');
-const packageJson = require(packageJsonPath);
-const { modifyReadme } = require(path.resolve(orig, 'scripts/modifyReadme'))
-const { generateAutogradingJSON } = require(path.resolve(orig, 'scripts/generateAutogradingJSON'))
-const testsDir = path.resolve(root, '__tests__');
-const autogradingJSONPath = path.resolve(root, '.github/classroom', 'autograding.json');
-const devMode = argv.dev;
+const root                          = path.resolve('./');
+const orig                          = __dirname;
+const argv                          = require(path.resolve(orig, 'lib/yargs'))
+const templateDir                   = path.resolve(orig, 'template');
+const packageJsonPath               = path.resolve(root, 'package.json');
+const readmePath                    = path.resolve(root, 'README.md');
+const autogradingReadmePath         = path.resolve(orig, 'AUTOGRADING.md');
+const packageJson                   = require(packageJsonPath);
+const { modifyReadme }              = require(path.resolve(orig, 'scripts/modifyReadme'))
+const { generateAutogradingJSON }   = require(path.resolve(orig, 'scripts/generateAutogradingJSON'))
+const { insertTemplateFiles }       = require(path.resolve(orig, 'scripts/insertTemplateFiles'))
+const testsDir                      = path.resolve(root, '__tests__');
+const autogradingJSONPath           = path.resolve(root, '.github/classroom', 'autograding.json');
+const devMode                       = argv.dev;
+const gitIgnoreTargetPath           = path.resolve(root, '.gitignore');
+const gitignore                     = ['node_modules', '.vscode', '.eslintcache'];
 
 console.log('Setup autograding');
 if(devMode) console.log('DEV mode')
-
-function insertTemplateFiles() {
-  console.log('Inserting autograding files');
-  if(!devMode) fse.copySync(templateDir, root);
-  // .gitignore needs to be generated because of a bug in npm v7 https://github.com/npm/cli/issues/2144
-  fse.writeFileSync(path.resolve(root, '.gitignore'), 'node_modules\n.vscode\n.eslintcache');
-}
 
 function modifyPackageJson() {
   const  originalPackageJson = JSON.parse(JSON.stringify(packageJson))
@@ -93,7 +89,7 @@ function modifyPackageJson() {
   fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 }
 
-insertTemplateFiles();
+insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
 modifyPackageJson();
 if(!devMode) {
   generateAutogradingJSON(testsDir, autogradingJSONPath);
