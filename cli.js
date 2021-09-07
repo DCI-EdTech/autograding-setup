@@ -2,9 +2,7 @@
 const { exec } = require('child_process');
 const fse = require('fs-extra');
 const path = require('path');
-const yargs = require('yargs/yargs')
-const { hideBin } = require('yargs/helpers')
-const argv = yargs(hideBin(process.argv)).boolean(['dev']).argv
+const argv = require('./lib/yargs')
 
 const root = path.resolve('./');
 const orig = __dirname;
@@ -60,7 +58,8 @@ function modifyPackageJson() {
   // if devMode set up script to restore original packageJson
   if(devMode) {
     Object.assign(packageJson.scripts, {
-      "postinstall": `echo '${JSON.stringify(originalPackageJson, null, 2)}' > 'package.json'`
+      "postinstall": `echo '${JSON.stringify(originalPackageJson, null, 2)}' > 'package.json'`,
+      "prepare": ""
     });
   }
   
