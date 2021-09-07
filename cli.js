@@ -12,7 +12,9 @@ const readmePath = path.resolve(root, 'README.md');
 const autogradingReadmePath = path.resolve(orig, 'AUTOGRADING.md');
 const packageJson = require(packageJsonPath);
 const { modifyReadme } = require(path.resolve(orig, 'scripts/modifyReadme'))
-const testsDir = '__tests__';
+const { generateAutogradingJSON } = require(path.resolve(orig, 'scripts/generateAutogradingJSON'))
+const testsDir = path.resolve(root, '__tests__');
+const autogradingJSONPath = path.resolve(root, '.github/classroom', 'autograding.json');
 const devMode = argv.dev;
 
 console.log('Setup autograding');
@@ -23,28 +25,6 @@ function insertTemplateFiles() {
   if(!devMode) fse.copySync(templateDir, root);
   // .gitignore needs to be generated because of a bug in npm v7 https://github.com/npm/cli/issues/2144
   fse.writeFileSync(path.resolve(root, '.gitignore'), 'node_modules\n.vscode\n.eslintcache');
-}
-
-function generateAutogradingJSON() {
-  const filesDir = path.resolve(root, testsDir)
-  // read test folder contents  
-  const testFiles = fse.readdirSync(filesDir);
-  // filer autograding test files
-  const autogradingTests = testFiles.reduce((acc, file) => {
-    const taskName = path.basename(file).match(/^tasks\.(.*)\.js$/)[1];
-    if(taskName) acc.push({
-      "name": `Task ${taskName}`,
-      "setup": "npm install --ignore-scripts",
-      "run": `npm test -- ${testsDir}/${file}`,
-      "timeout": 10,
-      "points": 10
-    })
-    return acc;
-  }, [])
-  const autogradingJSON = {
-    tests: autogradingTests
-  };
-  fse.outputFileSync(path.resolve(root, '.github/classroom', 'autograding.json'), JSON.stringify(autogradingJSON, null, 2));
 }
 
 function modifyPackageJson() {
@@ -116,7 +96,7 @@ function modifyPackageJson() {
 insertTemplateFiles();
 modifyPackageJson();
 if(!devMode) {
-  generateAutogradingJSON();
+  generateAutogradingJSON(testsDir, autogradingJSONPath);
   modifyReadme(readmePath, autogradingReadmePath);
   exec('git add . && git commit -m "added autograding setup"')
 }
