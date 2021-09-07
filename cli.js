@@ -50,7 +50,7 @@ function generateAutogradingJSON() {
 }
 
 function modifyPackageJson() {
-  const  originalPackageJson = Object.assign({}, packageJson) 
+  const  originalPackageJson = JSON.parse(JSON.stringify(packageJson))
   Object.assign(packageJson.scripts, {
     "test": "jest",
     "test:watch": "jest --watch",
@@ -60,7 +60,7 @@ function modifyPackageJson() {
   // if devMode set up script to restore original packageJson
   if(devMode) {
     Object.assign(packageJson.scripts, {
-      "postinstall": `echo '${JSON.stringify(originalPackageJson)}' > 'package.json'`
+      "postinstall": `echo '${JSON.stringify(originalPackageJson, null, 2)}' > 'package.json'`
     });
   }
   
