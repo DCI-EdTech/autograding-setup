@@ -1,6 +1,7 @@
 const fse = require('fs-extra');
 const argv = require('../lib/yargs');
 const devMode = argv.dev;
+const { root } = require('../lib/refs')
 
 exports.insertTemplateFiles = function(templateDir, ignoreList, outputPath) {
   console.log('Inserting autograding files');
