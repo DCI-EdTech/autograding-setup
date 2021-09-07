@@ -2,9 +2,9 @@
 const { exec } = require('child_process');
 const fse = require('fs-extra');
 const path = require('path');
-const yargs = require('yargs/yargs').boolean(['dev'])
+const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
-const argv = yargs(hideBin(process.argv)).argv
+const argv = yargs(hideBin(process.argv)).boolean(['dev']).argv
 
 const root = path.resolve('./');
 const orig = __dirname;
