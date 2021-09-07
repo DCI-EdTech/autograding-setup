@@ -50,8 +50,7 @@ function generateAutogradingJSON() {
 }
 
 function modifyPackageJson() {
-  let originalPackageJson
-  Object.assign(originalPackageJson, packageJson) 
+  const  originalPackageJson = Object.assign({}, packageJson) 
   Object.assign(packageJson.scripts, {
     "test": "jest",
     "test:watch": "jest --watch",
