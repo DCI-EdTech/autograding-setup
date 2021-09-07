@@ -3,8 +3,7 @@ const { exec } = require('child_process');
 const fse = require('fs-extra');
 const path = require('path');
 
-const root                          = path.resolve('./');
-const orig                          = __dirname;
+const { root, orig}                 = require('./lib/refs')
 const argv                          = require(path.resolve(orig, 'lib/yargs'))
 const templateDir                   = path.resolve(orig, 'template');
 const packageJsonPath               = path.resolve(root, 'package.json');
