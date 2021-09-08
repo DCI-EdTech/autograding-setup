@@ -1,6 +1,7 @@
 const fse = require('fs-extra');
 const path = require('path');
-const {escapeRegExp} = require('../lib/helpers')
+const { escapeRegExp } = require('../lib/helpers')
+const { orig } = require('../lib/refs')
 
 const readmeInfoPath = path.resolve(orig, 'AUTOGRADING.md');
 const setupInfoPath = path.resolve(orig, 'SETUP.md');
