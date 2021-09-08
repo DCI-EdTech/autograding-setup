@@ -22,9 +22,9 @@ if(devMode) console.log('DEV mode')
 
 insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
 modifyPackageJson(packageJsonPath);
+modifyReadme(readmePath);
 if(!devMode) {
   generateAutogradingJSON(testsDir, autogradingJSONPath);
-  modifyReadme(readmePath);
   exec('git add . && git commit -m "added autograding setup"')
 }
 
