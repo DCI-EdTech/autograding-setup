@@ -2,8 +2,8 @@ const fse = require('fs-extra');
 const path = require('path');
 const {escapeRegExp} = require('../lib/helpers')
 
-const readmeInfoPath = 'AUTOGRADING.md';
-const setupInfoPath = 'SETUP.md'
+const readmeInfoPath = path.resolve(orig, 'AUTOGRADING.md');
+const setupInfoPath = path.resolve(orig, 'SETUP.md');
 const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)\n\r`;
 const infoDelimiters = ['[//]: # (autograding info start)', '[//]: # (autograding info end)'];
 const setupDelimiters = ['[//]: # (autograding setup start)', '[//]: # (autograding setup end)'];
