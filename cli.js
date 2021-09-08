@@ -7,7 +7,6 @@ const argv                          = require(path.resolve(orig, 'lib/yargs'))
 const templateDir                   = path.resolve(orig, 'template');
 const packageJsonPath               = path.resolve(root, 'package.json');
 const readmePath                    = path.resolve(root, 'README.md');
-const autogradingReadmePath         = path.resolve(orig, 'AUTOGRADING.md');
 const { modifyReadme }              = require(path.resolve(orig, 'scripts/modifyReadme'))
 const { generateAutogradingJSON }   = require(path.resolve(orig, 'scripts/generateAutogradingJSON'))
 const { insertTemplateFiles }       = require(path.resolve(orig, 'scripts/insertTemplateFiles'))
@@ -25,7 +24,7 @@ insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
 modifyPackageJson(packageJsonPath);
 if(!devMode) {
   generateAutogradingJSON(testsDir, autogradingJSONPath);
-  modifyReadme(readmePath, autogradingReadmePath);
+  modifyReadme(readmePath);
   exec('git add . && git commit -m "added autograding setup"')
 }
 

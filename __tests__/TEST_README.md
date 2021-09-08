@@ -1,12 +1,14 @@
 ![Points badge](../../blob/badges/.github/badges/points.svg)
 # CONSOLE.LOG EXERCISES: Getting Started 
-
-These exercises are aimed at making you familiar with using node to run your scripts & the console.log method. For each exercise, run your script in node to check if your console.log(s) are working. Remember to use camelCase where needed.
-
+[//]: # (autograding setup start)
 ## Setup
 - clone this repository to your machine
 - open a terminal in VS Code
+- If necessary, cd into the project directory
 - run `npm install` in the project directory
+[//]: # (autograding setup end)
+
+These exercises are aimed at making you familiar with using node to run your scripts & the console.log method. For each exercise, run your script in node to check if your console.log(s) are working. Remember to use camelCase where needed.
 
 ## Instructions
 Work in the file `solution.js`  
