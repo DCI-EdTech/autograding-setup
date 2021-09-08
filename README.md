@@ -35,3 +35,10 @@ Script to insert all files and configuration for autograding into exercise repos
 ### Commands executed during installation
 - `husky install`
 - `git add . && git commit -m "added autograding setup"`
+
+## dev mode (when adding autograding or modifying exercise)
+```
+"scripts": {
+   "preinstall": "npx github:DCI-EdTech/autograding-setup --dev"
+}
+```
