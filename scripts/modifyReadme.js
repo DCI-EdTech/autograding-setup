@@ -12,6 +12,7 @@ const infoDelimiters = ['[//]: # (autograding info start)', '[//]: # (autogradin
 const setupDelimiters = ['[//]: # (autograding setup start)', '[//]: # (autograding setup end)'];
 
 exports.modifyReadme = function (readmePath) {
+  console.log('modify readme')
   let readme = fse.readFileSync(readmePath, 'utf8')
 
   // add setup instructions
@@ -23,10 +24,10 @@ exports.modifyReadme = function (readmePath) {
 
     // add autograding info
     readme = addAutogradingInfo(readme)
-
-    // save
-    fse.writeFileSync(readmePath, readme);
   }
+
+  // save
+  fse.writeFileSync(readmePath, readme);
 }
 
 function addPointsBadge(readme) {
