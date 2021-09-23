@@ -2,4 +2,5 @@ name: 'DCI Exercise Automation'
 runs:
   using: "composite"
   steps:
-    -uses: ./.github/actions/autograding
+    - name: Autograding
+      uses: ./.github/actions/autograding
