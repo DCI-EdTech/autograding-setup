@@ -2,6 +2,5 @@ name: 'DCI Exercise Automation'
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v1
     - name: Autograding
-      uses: ./.github/actions/autograding
+      uses: DCI-EdTech/autograding-setup/autograding@action-reroute
