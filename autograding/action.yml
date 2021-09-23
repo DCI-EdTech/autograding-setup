@@ -1,6 +1,5 @@
 name: Autograding
 runs:
-  using: "composite"
   steps:
     - uses: actions/checkout@v2
       with:

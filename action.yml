@@ -1,6 +1,5 @@
 name: 'DCI Exercise Automation'
 runs:
-  using: "composite"
   steps:
     - name: Autograding
       uses: DCI-EdTech/autograding-setup/autograding@action-reroute
