@@ -14,18 +14,23 @@ const { modifyPackageJson }         = require(path.resolve(orig, 'scripts/modify
 const testsDir                      = path.resolve(root, '__tests__');
 const autogradingJSONPath           = path.resolve(root, '.github/classroom', 'autograding.json');
 const devMode                       = argv.dev;
+const isCI                          = argv.CI;
 const gitIgnoreTargetPath           = path.resolve(root, '.gitignore');
 const gitignore                     = ['node_modules', '.vscode', '.eslintcache'];
 
 console.log('Setup autograding');
 if(devMode) console.log('DEV mode')
+if(isCI) console.log('CI mode')
 
-insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
-modifyPackageJson(packageJsonPath);
-modifyReadme(readmePath);
-if(!devMode) {
+if(isCI) {
   generateAutogradingJSON(testsDir, autogradingJSONPath);
-  exec('git add . && git commit -m "added autograding setup"')
+} else {
+  insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
+  modifyPackageJson(packageJsonPath);
+  modifyReadme(readmePath);
+  if(!devMode) {
+    exec('git add . && git commit -m "added autograding setup"')
+  }
 }
 
 console.log('autograding pre-setup done')
