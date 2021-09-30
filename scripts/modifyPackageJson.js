@@ -1,6 +1,8 @@
 const fse = require('fs-extra');
 const argv = require('../lib/yargs')
+const lintingLevels = require('../settings/linting-levels')
 const devMode = argv.dev;
+const lintingStringency = argv.lintingStringency
 
 exports.modifyPackageJson = function(packageJsonPath) {
   const packageJson = require(packageJsonPath);
@@ -37,11 +39,7 @@ exports.modifyPackageJson = function(packageJsonPath) {
       "parserOptions": {
         "ecmaVersion": 6
       },
-      "rules": {
-        "no-console": "off",
-        "eol-last": "off",
-        "prefer-template": "off"
-      }
+      "rules": lintingLevels[lintingStringency]
     },
     "eslintIgnore": [
       "__tests__/*.js",
