@@ -22,7 +22,6 @@ exports.modifyPackageJson = function(packageJsonPath) {
   }
   
   Object.assign(packageJson, {
-    "devDependencies": {},
     "jest": {
       "testEnvironment": "node",
       "coveragePathIgnorePatterns": [

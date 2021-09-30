@@ -36,6 +36,19 @@ Script to insert all files and configuration for autograding into exercise repos
 - `husky install`
 - `git add . && git commit -m "added autograding setup"`
 
+## Options
+### --dev
+Boolean
+
+See dev mode
+
+### --lintingStringency
+```['low' | 'medium' | 'high']```
+
+Default: 'high'
+
+Modifies eslint settings. 'low' and 'medium' levels turn off several rules to allow leniency in coding style in beginner and intermediate modules. For details on settings see [/settings/linting-levels.js](/settings/linting-levels.js)
+
 ## dev mode (when adding autograding or modifying exercise)
 ```
 "scripts": {
