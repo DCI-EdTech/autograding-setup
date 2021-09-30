@@ -54,7 +54,7 @@ exports.modifyPackageJson = function(packageJsonPath) {
     }
   });
   
-  Object.assign(packageJson.devDependencies, {
+  packageJson.devDependencies = Object.assign({
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.1",
@@ -62,9 +62,8 @@ exports.modifyPackageJson = function(packageJsonPath) {
     "eslint-plugin-promise": "^5.1.0",
     "husky": "^7.0.1",
     "jest": "^26.6.3",
-    "lint-staged": "^11.1.2",
-    "rewire": "^5.0.0"
-  });
+    "lint-staged": "^11.1.2"
+  }, packageJson.devDependencies);
   
   fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 }
