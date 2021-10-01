@@ -2,7 +2,7 @@ module.exports = {
   'low': {
     'no-console': 'off',
     'eol-last': 'off',
-    'semi': 'off',
+    'semi': 'off', // don't enforce semicolon on end of line
     'prefer-template': 'off',
     'no-unused-vars': 'off',
     'quotes': 'off' // don't enforce single quotes
