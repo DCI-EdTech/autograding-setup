@@ -6,7 +6,7 @@ Script to insert all files and configuration for autograding into exercise repos
 - The **package.json** needs to have
 ```
 "scripts": {
-   "preinstall": "npx github:DCI-EdTech/autograding-setup"
+   "preinstall": "npx -y github:DCI-EdTech/autograding-setup --no"
 }
 ```
 ## What it does
@@ -52,6 +52,6 @@ Modifies eslint settings. 'low' and 'medium' levels turn off several rules to al
 ## dev mode (when adding autograding or modifying exercise)
 ```
 "scripts": {
-   "preinstall": "npx github:DCI-EdTech/autograding-setup --dev"
+   "preinstall": "npx -y github:DCI-EdTech/autograding-setup --no --dev"
 }
 ```
