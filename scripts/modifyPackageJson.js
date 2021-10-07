@@ -30,6 +30,12 @@ exports.modifyPackageJson = function(packageJsonPath) {
       "verbose": true
     },
     "eslintConfig": {
+      "plugins": ["@html-eslint"],
+      "overrides": [{
+        "files": ["*.html"],
+        "parser": "@html-eslint/parser",
+        "extends": ["plugin:@html-eslint/recommended"]
+      }],
       "env": {
         "es6": true,
         "node": true
@@ -45,13 +51,15 @@ exports.modifyPackageJson = function(packageJsonPath) {
       "jest.config.js"
     ],
     "lint-staged": {
-      "*.js": [
+      "*.{js,html}": [
         "npx eslint --cache"
       ]
     }
   });
   
   packageJson.devDependencies = Object.assign({
+    "@html-eslint/eslint-plugin": "^0.11.0",
+    "@html-eslint/parser": "^0.11.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.1",

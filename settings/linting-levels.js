@@ -5,12 +5,14 @@ module.exports = {
     'semi': 'off', // don't enforce semicolon on end of line
     'prefer-template': 'off',
     'no-unused-vars': 'off',
-    'quotes': 'off' // don't enforce single quotes
+    'quotes': 'off', // don't enforce single quotes
+    '@html-eslint/require-lang': 'off'
   },
   'medium': {
     'no-console': 'off',
     'eol-last': 'off',
-    'prefer-template': 'off'
+    'prefer-template': 'off',
+    '@html-eslint/require-lang': 'off'
   },
   'high': {
     'eol-last': 'off'
