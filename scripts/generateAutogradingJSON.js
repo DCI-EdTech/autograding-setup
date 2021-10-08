@@ -3,12 +3,15 @@ const path = require('path');
 
 exports.generateAutogradingJSON = function(testsDir, outputPath) {
   // read test folder contents  
-  const testFiles = fse.readdirSync(testsDir).reduce((acc, file) => {
+  const testFiles = fse.readdirSync(testsDir)
+
+  // filer autograding test files
+  const autogradingTestFiles = testFiles.reduce((acc, file) => {
     const taskName = path.basename(file).match(/^tasks\.(.*)\.js$/)[1];
     if(taskName) acc.push({taskName, file});
   }, []);
-  // filer autograding test files
-  const autogradingTests = testFiles.map((item, i, list) => {
+  
+  const autogradingTests = autogradingTestFiles.map((item, i, list) => {
     const pointsPerTask = Math.round(100/list.length)
     return {
       "name": `Task ${item.taskName}`,
