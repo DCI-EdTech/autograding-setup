@@ -27,7 +27,7 @@ if(!devMode) {
   generateAutogradingJSON(testsDir, autogradingJSONPath);
   exec('git add . && git commit -m "added autograding setup"')
 }
-// crear npx cache for next run
+// clear npx cache for next run
 exec('npx -y clear-npx-cache');
 
 console.log('autograding pre-setup done')
