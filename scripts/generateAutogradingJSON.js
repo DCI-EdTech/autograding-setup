@@ -9,6 +9,7 @@ exports.generateAutogradingJSON = function(testsDir, outputPath) {
   const autogradingTestFiles = testFiles.reduce((acc, file) => {
     const taskName = path.basename(file).match(/^tasks\.(.*)\.js$/)[1];
     if(taskName) acc.push({taskName, file});
+    return acc;
   }, []);
   
   const autogradingTests = autogradingTestFiles.map((item, i, list) => {
