@@ -5,14 +5,14 @@ exports.generateAutogradingJSON = function(testsDir, outputPath) {
   // read test folder contents  
   const testFiles = fse.readdirSync(testsDir);
   // filer autograding test files
-  const autogradingTests = testFiles.reduce((acc, file) => {
+  const autogradingTests = testFiles.reduce((acc, file, i, list) => {
     const taskName = path.basename(file).match(/^tasks\.(.*)\.js$/)[1];
     if(taskName) acc.push({
       "name": `Task ${taskName}`,
       "setup": "npm install --ignore-scripts",
       "run": `npm test -- ${testsDir}/${file}`,
       "timeout": 10,
-      "points": 10
+      "points": 100/list.length
     })
     return acc;
   }, [])
