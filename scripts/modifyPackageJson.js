@@ -22,13 +22,6 @@ exports.modifyPackageJson = function(packageJsonPath) {
   }
   
   Object.assign(packageJson, {
-    "jest": {
-      "testEnvironment": "node",
-      "coveragePathIgnorePatterns": [
-        "/node_modules/"
-      ],
-      "verbose": true
-    },
     "eslintConfig": {
       "plugins": ["@html-eslint"],
       "overrides": [{
@@ -56,6 +49,14 @@ exports.modifyPackageJson = function(packageJsonPath) {
       ]
     }
   });
+
+  packageJson.jest = Object.assign({
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "verbose": true
+  }, packageJson.jest);
   
   packageJson.devDependencies = Object.assign({
     "@html-eslint/eslint-plugin": "^0.11.0",
