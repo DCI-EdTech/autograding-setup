@@ -37,16 +37,22 @@ exports.modifyPackageJson = function(packageJsonPath) {
       "parserOptions": {
         "ecmaVersion": 6
       },
-      "rules": lintingLevels[lintingStringency]
+      "rules": lintingLevels[lintingStringency]['js/html']
     },
     "eslintIgnore": [
       "__tests__/*.js",
       "jest.config.js"
     ],
+    "stylelint": {
+      "extends": "stylelint-config-standard",
+      "rules": lintingLevels[lintingStringency]['css']
+    },
     "lint-staged": {
       "*.{js,html}": [
         "npx eslint --cache"
-      ]
+      ],
+      "*.css": "stylelint",
+      "*.scss": "stylelint --syntax=scss"
     }
   });
 
@@ -68,7 +74,9 @@ exports.modifyPackageJson = function(packageJsonPath) {
     "eslint-plugin-promise": "^5.1.0",
     "husky": "^7.0.1",
     "jest": "^26.6.3",
-    "lint-staged": "^11.1.2"
+    "lint-staged": "^11.1.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0"
   }, packageJson.devDependencies);
   
   fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
