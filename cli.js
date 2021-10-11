@@ -31,4 +31,5 @@ if(!devMode) {
 //exec('npx -y clear-npx-cache');
 
 console.log('autograding pre-setup done')
+console.log('root', root, 'orig', orig)
 process.exit();
