@@ -31,7 +31,7 @@ if(!devMode) {
   exec('git add . && git commit -m "added autograding setup"')
 }
 // clear self from npx cache for next run
-exec(`rm -rf ${__dirname.match(/.*_npx\/[a-zA-Z0-9]*/)[0]}`);
+//exec(`rm -rf ${__dirname.match(/.*_npx\/[a-zA-Z0-9]*/)[0]}`);
 
 console.log('autograding pre-setup done')
 process.exit();
