@@ -17,6 +17,9 @@ const devMode                       = argv.dev;
 const gitIgnoreTargetPath           = path.resolve(root, '.gitignore');
 const gitignore                     = ['node_modules', '.vscode', '.eslintcache'];
 
+(async () => {
+  
+})();
 console.log('Setup autograding');
 if(devMode) console.log('DEV mode')
 
@@ -27,11 +30,8 @@ if(!devMode) {
   generateAutogradingJSON(testsDir, autogradingJSONPath);
   exec('git add . && git commit -m "added autograding setup"')
 }
-// clear npx cache for next run
-exec('npm config get cache', (err, stdout) => {
-  console.log('stdout', stdout)
-});
+// clear self from npx cache for next run
+exec(`rm -rf ${__dirname.match(/.*_npx\/[a-zA-Z0-9]*/)[0]}`);
 
 console.log('autograding pre-setup done')
-console.log('root', root, 'dirname', __dirname)
 process.exit();
