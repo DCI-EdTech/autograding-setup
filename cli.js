@@ -28,7 +28,9 @@ if(!devMode) {
   exec('git add . && git commit -m "added autograding setup"')
 }
 // clear npx cache for next run
-//exec('npx -y clear-npx-cache');
+exec('npm config get cache', (err, stdout) => {
+  console.log('stdout', stdout)
+});
 
 console.log('autograding pre-setup done')
 console.log('root', root, 'dirname', __dirname)
