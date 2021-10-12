@@ -10,7 +10,7 @@ exports.modifyPackageJson = function(packageJsonPath) {
   Object.assign(packageJson.scripts, {
     "test": "jest",
     "test:watch": "jest --watch",
-    "prepare": "npx husky install"
+    "prepare": "npm_config_yes=true npx husky install"
   });
 
   // if devMode set up script to restore original packageJson
