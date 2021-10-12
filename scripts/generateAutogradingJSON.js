@@ -16,7 +16,7 @@ exports.generateAutogradingJSON = function(testsDir, outputPath) {
     const pointsPerTask = Math.round(100/list.length)
     return {
       "name": `Task ${item.taskName}`,
-      "setup": "npm install --ignore-scripts",
+      "setup": "npm ci --ignore-scripts",
       "run": `npm test -- ${testsDir}/${item.file}`,
       "timeout": 10,
       "points": i === list.length-1 ? 100 - pointsPerTask * (list.length-1) : pointsPerTask
