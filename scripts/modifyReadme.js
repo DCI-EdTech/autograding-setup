@@ -11,6 +11,8 @@ const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/poin
 const infoDelimiters = ['[//]: # (autograding info start)', '[//]: # (autograding info end)'];
 const setupDelimiters = ['[//]: # (autograding setup start)', '[//]: # (autograding setup end)'];
 
+const headlineLevel1Regex = /^#[^#].*$/m;
+
 exports.modifyReadme = function (readmePath) {
   console.log('modify readme')
   let readme = fse.readFileSync(readmePath, 'utf8')
@@ -31,15 +33,17 @@ exports.modifyReadme = function (readmePath) {
 }
 
 function addPointsBadge(readme) {
+  // delete old points badge
   readme = readme.replace(/\!\[Points badge\]\(.*[\n\r]*/g, '')
-  return `${pointsBadgeString}${readme}`;
+  // insert points badge before level 1 headline match
+  return readme.replace(headlineLevel1Regex, `${pointsBadgeString}\n$&`);
 }
 
 function addSetupInstructions(readme) {
   const setupInfo = fse.readFileSync(setupInfoPath, 'utf8');
   const setupRE = new RegExp(`[\n\r]*${escapeRegExp(setupDelimiters[0])}([\\s\\S]*)${escapeRegExp(setupDelimiters[1])}[\n\r]*`, 'gsm');
   readme = readme.replace(setupRE, '\n')
-  return readme.replace(/^#[^#].*$/m, `$&\n\r${setupDelimiters[0]}\n${setupInfo}\n\r${setupDelimiters[1]}\n`);
+  return readme.replace(headlineLevel1Regex, `$&\n\r${setupDelimiters[0]}\n${setupInfo}\n\r${setupDelimiters[1]}\n`);
 }
 
 function addAutogradingInfo(readme) {
