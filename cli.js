@@ -27,7 +27,7 @@ insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
 modifyPackageJson(packageJsonPath);
 modifyReadme(readmePath);
 if(!devMode) {
-  generateAutogradingJSON(testsDir, autogradingJSONPath);
+  generateAutogradingJSON(testsDir, autogradingJSONPath, packageJsonPath);
   exec('git add . && git commit -m "added autograding setup"')
 }
 // clear self from npx cache for next run
