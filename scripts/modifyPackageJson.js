@@ -60,8 +60,7 @@ exports.modifyPackageJson = function(packageJsonPath) {
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
-    ],
-    "verbose": true
+    ]
   }, packageJson.jest);
   
   packageJson.devDependencies = Object.assign({
