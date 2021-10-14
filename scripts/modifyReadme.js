@@ -7,7 +7,7 @@ const devMode = argv.dev;
 
 const readmeInfoPath = path.resolve(orig, 'AUTOGRADING.md');
 const setupInfoPath = path.resolve(orig, 'SETUP.md');
-const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)\n\r`;
+const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)`;
 const infoDelimiters = ['[//]: # (autograding info start)', '[//]: # (autograding info end)'];
 const setupDelimiters = ['[//]: # (autograding setup start)', '[//]: # (autograding setup end)'];
 
@@ -34,9 +34,9 @@ exports.modifyReadme = function (readmePath) {
 
 function addPointsBadge(readme) {
   // delete old points badge
-  readme = readme.replace(/\!\[Points badge\]\(.*[\n\r]*/g, '')
+  readme = readme.replace(/[\n]{0,1}.*\!\[Points badge\]\(.*[\n\r]*/g, '')
   // insert points badge before level 1 headline match
-  return readme.replace(headlineLevel1Regex, `${pointsBadgeString}\n$&`);
+  return readme.replace(headlineLevel1Regex, `\n[${pointsBadgeString} results](${argv.repoWebUrl}/actions)\n$&`);
 }
 
 function addSetupInstructions(readme) {
@@ -47,8 +47,10 @@ function addSetupInstructions(readme) {
 }
 
 function addAutogradingInfo(readme) {
-  const readmeInfo = fse.readFileSync(readmeInfoPath, 'utf8');
+  let readmeInfo = fse.readFileSync(readmeInfoPath, 'utf8');
   const infoRE = new RegExp(`[\n\r]*${escapeRegExp(infoDelimiters[0])}([\\s\\S]*)${escapeRegExp(infoDelimiters[1])}`, 'gsm');
+  // add repo link
+  readmeInfo = readmeInfo.replace(/#repoWebUrl/, argv.repoWebUrl)
   readme = readme.replace(infoRE, '')
   return `${readme}\n\r${infoDelimiters[0]}\n${readmeInfo}\n\r${infoDelimiters[1]}`;
 }
