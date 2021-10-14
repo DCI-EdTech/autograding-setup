@@ -1,5 +1,7 @@
+![DCI Logo](loho.png)
 ![Points badge](../../blob/badges/.github/badges/points.svg)
-# CONSOLE.LOG EXERCISES: Getting Started 
+
+# CONSOLE.LOG EXERCISES: Getting Started 
 [//]: # (autograding setup start)
 ## Setup
 - clone this repository to your machine

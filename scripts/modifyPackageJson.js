@@ -68,7 +68,7 @@ exports.modifyPackageJson = function(packageJsonPath) {
     "@html-eslint/parser": "^0.11.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.25.1",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "husky": "^7.0.1",
