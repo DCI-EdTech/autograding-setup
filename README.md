@@ -49,7 +49,8 @@ Default: 'high'
 
 Modifies eslint settings. 'low' and 'medium' levels turn off several rules to allow leniency in coding style in beginner and intermediate modules. For details on settings see [/settings/linting-levels.js](/settings/linting-levels.js)
 
-## dev mode (when adding autograding or modifying exercise)
+## dev mode
+DEV mode is automatically detected by checking where the repo was cloned from. Using the `--dev` option is only necessary to force dev mode in case your repo is not in the `DigitalCareerInstitute` org.
 ```
 "scripts": {
    "preinstall": "npm_config_yes=true npx github:DCI-EdTech/autograding-setup --no --dev"
