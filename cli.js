@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { exec } = require('child_process');
+const { execSync } = require('child_process');
 const path = require('path');
 
 const { root, orig }                = require('./lib/refs')
@@ -28,10 +28,10 @@ modifyPackageJson(packageJsonPath);
 modifyReadme(readmePath);
 if(!devMode) {
   generateAutogradingJSON(testsDir, autogradingJSONPath, packageJsonPath);
-  exec('git add . && git commit -m "added autograding setup"')
+  execSync('git add . && git commit -m "added autograding setup"')
 }
 // clear self from npx cache for next run
-exec(`rm -rf ${__dirname.match(/.*_npx\/[a-zA-Z0-9]*/)[0]}`);
+execSync(`rm -rf ${__dirname.match(/.*_npx\/[a-zA-Z0-9]*/)[0]}`);
 
 console.log('autograding pre-setup done')
 process.exit();
