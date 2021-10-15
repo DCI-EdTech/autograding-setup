@@ -4,6 +4,8 @@ This exercise will automatically check if your code complies with the [Airbnb St
 ## Points
 You will receive points for correctly completed tasks in the repository on GitHub. Check there after pushing to see how many points you achieved.
 ### Debugging your code
+> [reading the test outputs](https://github.com/DCI-EdTech/autograding-setup/wiki/Reading-test-outputs)
+
 There are two ways to see where you missed points for tasks:
 #### 1. Running tests locally
 Run `npm test` in the terminal. You will see where your solution differs from the expected result.
