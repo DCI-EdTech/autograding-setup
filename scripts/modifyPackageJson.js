@@ -4,7 +4,7 @@ const lintingLevels = require('../settings/linting-levels')
 const devMode = argv.dev;
 const lintingStringency = argv.lintingStringency
 
-exports.modifyPackageJson = function(packageJsonPath) {
+exports.modifyPackageJson = async function(packageJsonPath) {
   const packageJson = require(packageJsonPath);
   const originalPackageJson = JSON.parse(JSON.stringify(packageJson))
   Object.assign(packageJson.scripts, {
@@ -81,6 +81,5 @@ exports.modifyPackageJson = function(packageJsonPath) {
     "stylelint-config-standard": "^22.0.0"
   }, packageJson.devDependencies);
   
-  fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-  console.log(`${packageJsonPath} modified`);
+  await fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 }

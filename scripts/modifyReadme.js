@@ -13,23 +13,23 @@ const setupDelimiters = ['[//]: # (autograding setup start)', '[//]: # (autograd
 
 const headlineLevel1Regex = /^#[^#].*$/m;
 
-exports.modifyReadme = function (readmePath) {
+exports.modifyReadme = await function (readmePath) {
   console.log('modify readme')
-  let readme = fse.readFileSync(readmePath, 'utf8')
+  let readme = await fse.readFile(readmePath, 'utf8')
 
   // add setup instructions
-  readme = addSetupInstructions(readme)
+  readme = await addSetupInstructions(readme)
 
   if(!devMode) {
     // add points badge
     readme = addPointsBadge(readme);
 
     // add autograding info
-    readme = addAutogradingInfo(readme)
+    readme = await addAutogradingInfo(readme)
   }
 
   // save
-  fse.writeFileSync(readmePath, readme);
+  await fse.writeFile(readmePath, readme);
 }
 
 function addPointsBadge(readme) {
@@ -40,14 +40,14 @@ function addPointsBadge(readme) {
 }
 
 function addSetupInstructions(readme) {
-  const setupInfo = fse.readFileSync(setupInfoPath, 'utf8');
+  const setupInfo = await fse.readFile(setupInfoPath, 'utf8');
   const setupRE = new RegExp(`[\n\r]*${escapeRegExp(setupDelimiters[0])}([\\s\\S]*)${escapeRegExp(setupDelimiters[1])}[\n\r]*`, 'gsm');
   readme = readme.replace(setupRE, '\n')
   return readme.replace(headlineLevel1Regex, `$&\n\r${setupDelimiters[0]}\n${setupInfo}\n\r${setupDelimiters[1]}\n`);
 }
 
 function addAutogradingInfo(readme) {
-  let readmeInfo = fse.readFileSync(readmeInfoPath, 'utf8');
+  let readmeInfo = await fse.readFile(readmeInfoPath, 'utf8');
   const infoRE = new RegExp(`[\n\r]*${escapeRegExp(infoDelimiters[0])}([\\s\\S]*)${escapeRegExp(infoDelimiters[1])}`, 'gsm');
   // add repo link
   readmeInfo = readmeInfo.replace(/#repoWebUrl/, argv.repoWebUrl)

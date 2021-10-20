@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { execSync } = require('child_process');
+const { exec } = require('child_process');
 const path = require('path');
 
 const { root, orig }                = require('./lib/refs')
@@ -18,20 +18,19 @@ const gitIgnoreTargetPath           = path.resolve(root, '.gitignore');
 const gitignore                     = ['node_modules', '.vscode', '.eslintcache'];
 
 (async () => {
-  
+  console.log('Setup autograding');
+  if(devMode) console.log('DEV mode')
+
+  await insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
+  await modifyPackageJson(packageJsonPath);
+  await modifyReadme(readmePath);
+  if(!devMode) {
+    await generateAutogradingJSON(testsDir, autogradingJSONPath, packageJsonPath);
+    await exec('git add . && git commit -m "added autograding setup" --no-verify')
+  }
+  // clear self from npx cache for next run
+  await exec(`rm -rf ${__dirname.match(/.*_npx\/[a-zA-Z0-9]*/)[0]}`);
+
+  console.log('autograding pre-setup done')
+  process.exit();
 })();
-console.log('Setup autograding');
-if(devMode) console.log('DEV mode')
-
-insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
-modifyPackageJson(packageJsonPath);
-modifyReadme(readmePath);
-if(!devMode) {
-  generateAutogradingJSON(testsDir, autogradingJSONPath, packageJsonPath);
-  execSync('git add . && git commit -m "added autograding setup" --no-verify')
-}
-// clear self from npx cache for next run
-execSync(`rm -rf ${__dirname.match(/.*_npx\/[a-zA-Z0-9]*/)[0]}`);
-
-console.log('autograding pre-setup done')
-process.exit();
