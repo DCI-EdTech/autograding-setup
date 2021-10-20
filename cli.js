@@ -22,6 +22,7 @@ const gitignore                     = ['node_modules', '.vscode', '.eslintcache'
   if(devMode) console.log('DEV mode')
 
   await modifyPackageJson(packageJsonPath);
+  await exec('npm install --ignore-scripts');
   await insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
   await modifyReadme(readmePath);
   if(!devMode) {
