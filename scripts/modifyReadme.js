@@ -13,7 +13,7 @@ const setupDelimiters = ['[//]: # (autograding setup start)', '[//]: # (autograd
 
 const headlineLevel1Regex = /^#[^#].*$/m;
 
-exports.modifyReadme = await function (readmePath) {
+exports.modifyReadme = async function (readmePath) {
   console.log('modify readme')
   let readme = await fse.readFile(readmePath, 'utf8')
 
