@@ -82,4 +82,8 @@ exports.modifyPackageJson = function(packageJsonPath) {
   }, packageJson.devDependencies);
   
   fse.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+  // wait for package.json to be written
+  setTimeout(() => {
+    console.log(`${packageJsonPath} modified`);
+  }, 100);
 }
