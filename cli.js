@@ -28,7 +28,7 @@ modifyPackageJson(packageJsonPath);
 modifyReadme(readmePath);
 if(!devMode) {
   generateAutogradingJSON(testsDir, autogradingJSONPath, packageJsonPath);
-  execSync('git add . && HUSKY_SKIP_HOOKS=true git commit -m "added autograding setup --no-verify"')
+  execSync('git add . && git commit -m "added autograding setup" --no-verify')
 }
 // clear self from npx cache for next run
 execSync(`rm -rf ${__dirname.match(/.*_npx\/[a-zA-Z0-9]*/)[0]}`);
