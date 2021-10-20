@@ -39,14 +39,14 @@ function addPointsBadge(readme) {
   return readme.replace(headlineLevel1Regex, `\n[${pointsBadgeString} results](${argv.repoWebUrl}/actions)\n$&`);
 }
 
-function addSetupInstructions(readme) {
+async function addSetupInstructions(readme) {
   const setupInfo = await fse.readFile(setupInfoPath, 'utf8');
   const setupRE = new RegExp(`[\n\r]*${escapeRegExp(setupDelimiters[0])}([\\s\\S]*)${escapeRegExp(setupDelimiters[1])}[\n\r]*`, 'gsm');
   readme = readme.replace(setupRE, '\n')
   return readme.replace(headlineLevel1Regex, `$&\n\r${setupDelimiters[0]}\n${setupInfo}\n\r${setupDelimiters[1]}\n`);
 }
 
-function addAutogradingInfo(readme) {
+async function addAutogradingInfo(readme) {
   let readmeInfo = await fse.readFile(readmeInfoPath, 'utf8');
   const infoRE = new RegExp(`[\n\r]*${escapeRegExp(infoDelimiters[0])}([\\s\\S]*)${escapeRegExp(infoDelimiters[1])}`, 'gsm');
   // add repo link
