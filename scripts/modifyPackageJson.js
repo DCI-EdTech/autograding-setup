@@ -33,7 +33,7 @@ exports.modifyPackageJson = function(packageJsonPath) {
         "es6": true,
         "node": true
       },
-      "extends": ["./node_modules/eslint-config-airbnb-base/.eslintrc"],
+      "extends": ["airbnb", "airbnb/hooks"],
       "parserOptions": {
         "ecmaVersion": 6
       },
@@ -67,7 +67,10 @@ exports.modifyPackageJson = function(packageJsonPath) {
     "@html-eslint/eslint-plugin": "^0.11.0",
     "@html-eslint/parser": "^0.11.0",
     "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
