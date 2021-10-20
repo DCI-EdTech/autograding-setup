@@ -10,7 +10,7 @@ exports.modifyPackageJson = function(packageJsonPath) {
   Object.assign(packageJson.scripts, {
     "test": "jest",
     "test:watch": "jest --watch",
-    "prepare": "npm_config_yes=true npx husky install"
+    "prepare": "npm_config_yes=true npx husky install && npm_config_yes=true npx install-peerdeps --dev eslint-config-airbnb"
   });
 
   // if devMode set up script to restore original packageJson
