@@ -24,6 +24,7 @@ console.log('Setup autograding');
 if(devMode) console.log('DEV mode')
 
 insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
+execSync('npm_config_yes=true npx husky install')
 modifyPackageJson(packageJsonPath);
 modifyReadme(readmePath);
 if(!devMode) {
