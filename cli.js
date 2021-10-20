@@ -21,8 +21,8 @@ const gitignore                     = ['node_modules', '.vscode', '.eslintcache'
   console.log('Setup autograding');
   if(devMode) console.log('DEV mode')
 
-  await insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
   await modifyPackageJson(packageJsonPath);
+  await insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
   await modifyReadme(readmePath);
   if(!devMode) {
     await generateAutogradingJSON(testsDir, autogradingJSONPath, packageJsonPath);

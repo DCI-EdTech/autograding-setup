@@ -82,4 +82,6 @@ exports.modifyPackageJson = async function(packageJsonPath) {
   }, packageJson.devDependencies);
   
   await fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
+  // wait for write to complete
+  await new Promise(resolve => setTimeout(resolve, 100));
 }
