@@ -24,12 +24,11 @@ console.log('Setup autograding');
 if(devMode) console.log('DEV mode')
 
 insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
-execSync('npm_config_yes=true npx husky install')
 modifyPackageJson(packageJsonPath);
 modifyReadme(readmePath);
 if(!devMode) {
   generateAutogradingJSON(testsDir, autogradingJSONPath, packageJsonPath);
-  execSync('git add . && git commit -m "added autograding setup"')
+  execSync('git add . && HUSKY_SKIP_HOOKS=true git commit -m "added autograding setup --no-verify"')
 }
 // clear self from npx cache for next run
 execSync(`rm -rf ${__dirname.match(/.*_npx\/[a-zA-Z0-9]*/)[0]}`);

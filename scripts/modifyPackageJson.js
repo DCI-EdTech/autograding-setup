@@ -9,13 +9,15 @@ exports.modifyPackageJson = function(packageJsonPath) {
   const originalPackageJson = JSON.parse(JSON.stringify(packageJson))
   Object.assign(packageJson.scripts, {
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prepare": "npm_config_yes=true npx husky install"
   });
 
   // if devMode set up script to restore original packageJson
   if(devMode) {
     Object.assign(packageJson.scripts, {
-      "postinstall": `echo '${JSON.stringify(originalPackageJson, null, 2)}' > 'package.json'`
+      "postinstall": `echo '${JSON.stringify(originalPackageJson, null, 2)}' > 'package.json'`,
+      "prepare": ""
     });
   }
   
