@@ -15,15 +15,15 @@ const testsDir                      = '__tests__';
 const autogradingJSONPath           = path.resolve(root, '.github/classroom', 'autograding.json');
 const devMode                       = argv.dev;
 const gitIgnoreTargetPath           = path.resolve(root, '.gitignore');
-const gitignore                     = ['node_modules', '.vscode', '.eslintcache'];
+const gitignoreTemplatePath         = path.resolve(orig, 'settings/gitignore-template');
 
 (async () => {
   console.log('Setup autograding');
   if(devMode) console.log('DEV mode')
 
-  await insertTemplateFiles(templateDir, gitignore, gitIgnoreTargetPath);
   await modifyPackageJson(packageJsonPath);
   await exec('npm install --ignore-scripts');
+  await insertTemplateFiles(templateDir, gitignoreTemplatePath, gitIgnoreTargetPath);
   await modifyReadme(readmePath);
   if(!devMode) {
     await generateAutogradingJSON(testsDir, autogradingJSONPath, packageJsonPath);
