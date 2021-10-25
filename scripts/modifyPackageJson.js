@@ -22,23 +22,6 @@ exports.modifyPackageJson = async function(packageJsonPath) {
   }
   
   Object.assign(packageJson, {
-    "eslintConfig": {
-      "plugins": ["@html-eslint"],
-      "overrides": [{
-        "files": ["*.html"],
-        "parser": "@html-eslint/parser",
-        "extends": ["plugin:@html-eslint/recommended"]
-      }],
-      "env": {
-        "es6": true,
-        "node": true
-      },
-      "extends": ["airbnb", "airbnb/hooks"],
-      "parserOptions": {
-        "ecmaVersion": 6
-      },
-      "rules": lintingLevels[lintingStringency]['js/html']
-    },
     "eslintIgnore": [
       "__tests__/*.js",
       "jest.config.js"
@@ -55,6 +38,24 @@ exports.modifyPackageJson = async function(packageJsonPath) {
       "*.scss": "stylelint --syntax=scss"
     }
   });
+
+  packageJson.eslintConfig = Object.assign({
+    "plugins": ["@html-eslint"],
+    "overrides": [{
+      "files": ["*.html"],
+      "parser": "@html-eslint/parser",
+      "extends": ["plugin:@html-eslint/recommended"]
+    }],
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "extends": ["airbnb", "airbnb/hooks"],
+    "parserOptions": {
+      "ecmaVersion": 6
+    },
+    "rules": lintingLevels[lintingStringency]['js/html']
+  }, packageJson.eslintConfig);
 
   packageJson.jest = Object.assign({
     "testEnvironment": "node",
