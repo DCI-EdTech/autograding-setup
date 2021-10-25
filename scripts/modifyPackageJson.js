@@ -7,11 +7,11 @@ const lintingStringency = argv.lintingStringency
 exports.modifyPackageJson = async function(packageJsonPath) {
   const packageJson = require(packageJsonPath);
   const originalPackageJson = JSON.parse(JSON.stringify(packageJson))
-  Object.assign(packageJson.scripts, {
+  packageJson.scripts = Object.assign({
     "test": "jest",
     "test:watch": "jest --watch",
     "prepare": "npm_config_yes=true npx husky install"
-  });
+  }, packageJson.scripts);
 
   // if devMode set up script to restore original packageJson
   if(devMode) {
