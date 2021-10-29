@@ -1,9 +1,12 @@
 const fse = require('fs-extra');
 const path = require('path');
+const globby = require('globby');
 
 exports.generateAutogradingJSON = async function(testsDir, outputPath, packageJsonPath) {
   // read test folder contents  
-  const testFiles = await fse.readdir(testsDir)
+  const dirPath = await globby(`**/${testsDir}`);
+  console.log(dirPath);
+  const testFiles = await fse.readdir(dirPath[0]);
   const packageJson = require(packageJsonPath);
 
   // filer autograding test files
