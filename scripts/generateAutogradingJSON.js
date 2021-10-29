@@ -1,12 +1,13 @@
 const fse = require('fs-extra');
 const path = require('path');
-const glob = require("glob")
 
 exports.generateAutogradingJSON = async function(testsDir, outputPath, packageJsonPath) {
   // read test folder contents  
-  const dirPath = await glob(`**/${testsDir}/`);
-  console.log(dirPath);
-  const testFiles = await fse.readdir(dirPath[0]);
+  // if testsDir does not exist, look in src folder
+  if (!fse.existsSync(testsDir)) {
+    testsDir = path.join('src', testsDir);
+  }
+  const testFiles = await fse.readdir(testsDir);
   const packageJson = require(packageJsonPath);
 
   // filer autograding test files
