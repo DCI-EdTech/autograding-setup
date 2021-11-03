@@ -57,8 +57,7 @@ exports.modifyPackageJson = async function(packageJsonPath) {
     "rules": lintingLevels[lintingStringency]['js/html']
   }, packageJson.eslintConfig);
 
-  Object.assign({
-    "testEnvironment": "node",
+  packageJson.jest = Object.assign({
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
