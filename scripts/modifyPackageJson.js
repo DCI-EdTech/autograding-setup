@@ -10,7 +10,6 @@ exports.modifyPackageJson = async function(packageJsonPath) {
   const originalPackageJson = JSON.parse(JSON.stringify(packageJson))
   const isReact = (packageJson.dependencies.react || packageJson.devDependencies.react) && packageJson.scripts.test.includes('react-scripts');
   console.log('Modifying package.json')
-  console.log('  - isReact', isReact, packageJson.dependencies.react, packageJson.devDependencies.react, packageJson.scripts.test.includes('react-scripts'))
   packageJson.scripts = Object.assign({
     "test": "jest",
     "prepare": "npm_config_yes=true npx husky install"
