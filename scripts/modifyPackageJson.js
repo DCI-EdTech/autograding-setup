@@ -57,12 +57,12 @@ exports.modifyPackageJson = async function(packageJsonPath) {
     "rules": lintingLevels[lintingStringency]['js/html']
   }, packageJson.eslintConfig);
 
-  packageJson.jest = Object.assign({
+  Object.assign(packageJson.jest, {
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
-  }, packageJson.jest);
+  });
   
   packageJson.devDependencies = Object.assign({
     "@html-eslint/eslint-plugin": "^0.11.0",
