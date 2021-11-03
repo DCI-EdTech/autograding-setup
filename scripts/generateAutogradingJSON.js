@@ -24,7 +24,7 @@ exports.generateAutogradingJSON = async function(testsDir, outputPath, packageJs
     return {
       "name": `Task ${item.taskName}`,
       "setup": `npm ci --ignore-scripts${additionalSetup ? ' && ' + additionalSetup : ''}`,
-      "run": `SKIP_PREFLIGHT_CHECK=true npm test -- ${testsDir}/${item.file}${testOpts ? ' ' + testOpts : ''}`,
+      "run": `npm test -- ${testsDir}/${item.file}${testOpts ? ' ' + testOpts : ''}`,
       "timeout": 10,
       "points": i === list.length-1 ? 100 - pointsPerTask * (list.length-1) : pointsPerTask
     }
