@@ -5,7 +5,7 @@ const minimal = {
 
 module.exports = {
   minimal,
-  full: Object.assign(minimal, {
+  full: Object.assign({...minimal}, {
     "@html-eslint/eslint-plugin": "^0.11.0",
     "@html-eslint/parser": "^0.11.0",
     "eslint": "^7.32.0",
