@@ -8,7 +8,7 @@ const devDependencies = require('../settings/devDependencies')
 exports.modifyPackageJson = async function(packageJsonPath) {
   const packageJson = require(packageJsonPath);
   const originalPackageJson = JSON.parse(JSON.stringify(packageJson))
-  const isReact = (packageJson.dependencies.react || packageJson.devDependencies.react) && packageJson.scripts.test.includes('react-scripts');
+  const isReact = (packageJson.dependencies && packageJson.dependencies.react || packageJson.devDependencies && packageJson.devDependencies.react) && packageJson.scripts.test && packageJson.scripts.test.includes('react-scripts');
   console.log('Modifying package.json')
   packageJson.scripts = Object.assign({
     "test": "jest",
