@@ -34,7 +34,7 @@ exports.modifyPackageJson = async function(packageJsonPath) {
       "jest.config.js"
     ],
     "lint-staged": Object.assign({
-      "*.{js,html}": [
+      "*.{js}": [  //"*.{js,html}": [
         "npx eslint --cache"
       ]}, (!isReact && {
       "*.css": "stylelint",
