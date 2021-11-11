@@ -53,7 +53,7 @@ exports.modifyPackageJson = async function(packageJsonPath) {
       "es6": true,
       "node": true
     },
-    "extends": ["airbnb-base"],
+    "extends": "eslint:recommended",
     "parserOptions": {
       "ecmaVersion": 6
     },
