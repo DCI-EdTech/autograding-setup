@@ -43,12 +43,12 @@ exports.modifyPackageJson = async function(packageJsonPath) {
   });
 
   packageJson.eslintConfig = isReact ? { "extends": "react-app" } : Object.assign({
-    "plugins": ["@html-eslint"],
-    "overrides": [{
-      "files": ["*.html"],
-      "parser": "@html-eslint/parser",
-      "extends": ["plugin:@html-eslint/recommended"]
-    }],
+    //"plugins": ["@html-eslint"],
+    //"overrides": [{
+    //  "files": ["*.html"],
+    //  "parser": "@html-eslint/parser",
+    //  "extends": ["plugin:@html-eslint/recommended"]
+    //}],
     "env": {
       "es6": true,
       "node": true
