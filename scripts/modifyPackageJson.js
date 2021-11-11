@@ -53,7 +53,7 @@ exports.modifyPackageJson = async function(packageJsonPath) {
       "es6": true,
       "node": true
     },
-    "extends": ["airbnb", "airbnb/hooks"],
+    "extends": ["airbnb"],
     "parserOptions": {
       "ecmaVersion": 6
     },
