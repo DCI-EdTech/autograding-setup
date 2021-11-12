@@ -1,4 +1,5 @@
 const fse = require('fs-extra');
+const { readFile } = require('fs/promises')
 const path = require('path');
 const { escapeRegExp } = require('../lib/helpers')
 const { orig } = require('../lib/refs')
@@ -15,7 +16,7 @@ const headlineLevel1Regex = /^#[^#].*$/m;
 
 exports.modifyReadme = async function (readmePath) {
   console.log('modify readme')
-  let readme = await fse.readFile(readmePath, 'utf8')
+  let readme = await readFile(readmePath, 'utf8')
 
   // add setup instructions
   readme = await addSetupInstructions(readme)
@@ -29,7 +30,7 @@ exports.modifyReadme = async function (readmePath) {
   }
 
   // save
-  await fse.writeFile(readmePath, readme);
+  await fse.outputFile(readmePath, readme);
 }
 
 function addPointsBadge(readme) {
@@ -40,14 +41,14 @@ function addPointsBadge(readme) {
 }
 
 async function addSetupInstructions(readme) {
-  const setupInfo = await fse.readFile(setupInfoPath, 'utf8');
+  const setupInfo = await readFile(setupInfoPath, 'utf8');
   const setupRE = new RegExp(`[\n\r]*${escapeRegExp(setupDelimiters[0])}([\\s\\S]*)${escapeRegExp(setupDelimiters[1])}[\n\r]*`, 'gsm');
   readme = readme.replace(setupRE, '\n')
   return readme.replace(headlineLevel1Regex, `$&\n\r${setupDelimiters[0]}\n${setupInfo}\n\r${setupDelimiters[1]}\n`);
 }
 
 async function addAutogradingInfo(readme) {
-  let readmeInfo = await fse.readFile(readmeInfoPath, 'utf8');
+  let readmeInfo = await readFile(readmeInfoPath, 'utf8');
   const infoRE = new RegExp(`[\n\r]*${escapeRegExp(infoDelimiters[0])}([\\s\\S]*)${escapeRegExp(infoDelimiters[1])}`, 'gsm');
   // add repo link
   readmeInfo = readmeInfo.replace(/#repoWebUrl/, argv.repoWebUrl)

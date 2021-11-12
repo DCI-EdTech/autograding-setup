@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-const { exec } = require('child_process');
+const util = require('util');
 const path = require('path');
+const exec = util.promisify(require('child_process').exec);
 
 const { root, orig }                = require('./lib/refs')
 const argv                          = require(path.resolve(orig, 'lib/yargs'))
