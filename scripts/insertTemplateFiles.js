@@ -8,5 +8,5 @@ exports.insertTemplateFiles = async function(templateDir, gitignoreTemplatePath,
   if(!devMode) await fse.copy(templateDir, root);
   // .gitignore needs to be generated because of a bug in npm v7 https://github.com/npm/cli/issues/2144
   let gitignoreTemplate =  await fse.readFile(gitignoreTemplatePath, 'utf8')
-  await fse.writeFile(outputPath, gitignoreTemplate);
+  await fse.outputFile(outputPath, gitignoreTemplate);
 }

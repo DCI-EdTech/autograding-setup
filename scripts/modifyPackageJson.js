@@ -68,5 +68,5 @@ exports.modifyPackageJson = async function(packageJsonPath) {
   
   packageJson.devDependencies = Object.assign((isReact ? devDependencies.minimal : devDependencies.full), packageJson.devDependencies);
   
-  await fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
+  await fse.outputFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 }
