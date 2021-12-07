@@ -12,18 +12,18 @@ exports.modifyPackageJson = async function(packageJsonPath) {
   console.log('Modifying package.json')
   packageJson.scripts = Object.assign({
     "test": "jest",
-    "prepare": "npm_config_yes=true npx husky install"
+    //"prepare": "npm_config_yes=true npx husky install"
   }, packageJson.scripts);
 
   // if devMode set up script to restore original packageJson
   if(devMode) {
     Object.assign(packageJson.scripts, {
       "postinstall": `echo '${JSON.stringify(originalPackageJson, null, 2)}' > 'package.json'`,
-      "prepare": ""
+      //"prepare": ""
     });
   }
 
-  if(!isReact) packageJson.stylelint = Object.assign({
+  /*if(!isReact) packageJson.stylelint = Object.assign({
     "extends": "stylelint-config-standard",
     "rules": lintingLevels[lintingStringency]['css']
   }, packageJson.stylelint);
@@ -58,7 +58,7 @@ exports.modifyPackageJson = async function(packageJsonPath) {
       "ecmaVersion": 6
     },
     "rules": lintingLevels[lintingStringency]['js/html']
-  }, packageJson.eslintConfig);
+  }, packageJson.eslintConfig);*/
 
   packageJson.jest = Object.assign({
     "coveragePathIgnorePatterns": [
