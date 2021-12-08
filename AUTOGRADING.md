@@ -1,5 +1,5 @@
 ## Results
-![Points badge](../../blob/badges/.github/badges/badge.svg)
+![Results badge](../../blob/badges/.github/badges/badge.svg)
 
 ### Debugging your code
 > [reading the test outputs](https://github.com/DCI-EdTech/autograding-setup/wiki/Reading-test-outputs)
