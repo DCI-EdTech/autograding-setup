@@ -45,7 +45,7 @@ async function addSetupInstructions(readme) {
   return readme//.replace(headlineLevel1Regex, `$&\n\r${setupDelimiters[0]}\n${setupInfo}\n\r${setupDelimiters[1]}\n`);
 }
 
-async function addAutogradingInfo(readme) {
+async function addAutogradingInfo(fullReadme) {
   const branch = argv.branch
   const repoURL = argv.repoWebUrl
   const readmeInfo = `## Results
@@ -72,6 +72,6 @@ async function addAutogradingInfo(readme) {
   const infoRE = new RegExp(`[\n\r]*${escapeRegExp(infoDelimiters[0])}([\\s\\S]*)${escapeRegExp(infoDelimiters[1])}`, 'gsm');
 
   // remove old info
-  readme = readme.replace(infoRE, '')
-  return `${readme}\n\r${infoDelimiters[0]}\n${readmeInfo}\n\r${infoDelimiters[1]}`;
+  fullReadme = fullReadme.replace(infoRE, '')
+  return `${fullReadme}\n\r${infoDelimiters[0]}\n${readmeInfo}\n\r${infoDelimiters[1]}`;
 }

@@ -1,10 +1,6 @@
 name: GitHub Classroom Workflow
 
 on:
-  create:
-    branches:
-    - '*'
-    - '!badges'
   push:
     branches:
     - '*'
