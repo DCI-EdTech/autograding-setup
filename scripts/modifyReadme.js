@@ -6,10 +6,8 @@ const { orig } = require('../lib/refs')
 const argv = require('../lib/yargs');
 const devMode = argv.dev;
 
-const readmeInfoPath = path.resolve(orig, 'AUTOGRADING.md');
 const setupInfoPath = path.resolve(orig, 'SETUP.md');
 //const pointsBadgeString = `![Points badge](../../blob/badges/.github/badges/points.svg)`;
-const infoDelimiters = ['[//]: # (autograding info start)', '[//]: # (autograding info end)'];
 const setupDelimiters = ['[//]: # (autograding setup start)', '[//]: # (autograding setup end)'];
 
 const headlineLevel1Regex = /^#[^#].*$/m;
@@ -48,10 +46,32 @@ async function addSetupInstructions(readme) {
 }
 
 async function addAutogradingInfo(readme) {
-  let readmeInfo = await readFile(readmeInfoPath, 'utf8');
+  const branch = argv.branch
+  const repoURL = argv.repoWebUrl
+  const readmeInfo = `## Results
+  [![Results badge](../../blob/badges/.github/badges/${branch}/badge.svg)](${repoURL}/actions)
+  
+  [Results Details](${repoURL}/actions)
+  
+  ### Debugging your code
+  > [reading the test outputs](https://github.com/DCI-EdTech/autograding-setup/wiki/Reading-test-outputs)
+  
+  There are two ways to see why tasks might not be completed:
+  #### 1. Running tests locally
+  - Run \`npm install\`
+  - Run \`npm test\` in the terminal. You will see where your solution differs from the expected result.
+  
+  #### 2. Inspecting the test output on GitHub
+  - Go to the [Actions tab of your exercise repo](${repoURL}/actions)
+  - You will see a list of the test runs. Click on the topmost one.
+  - Click on 'Autograding'
+  - Expand the item 'Run DCI-EdTech/autograding-action@main'
+  - Here you see all outputs from the test run`
+
+  const infoDelimiters = ['[//]: # (autograding info start)', '[//]: # (autograding info end)'];
   const infoRE = new RegExp(`[\n\r]*${escapeRegExp(infoDelimiters[0])}([\\s\\S]*)${escapeRegExp(infoDelimiters[1])}`, 'gsm');
-  // add repo link
-  readmeInfo = readmeInfo.replace(/#repoWebUrl/g, argv.repoWebUrl)
+
+  // remove old info
   readme = readme.replace(infoRE, '')
   return `${readme}\n\r${infoDelimiters[0]}\n${readmeInfo}\n\r${infoDelimiters[1]}`;
 }
