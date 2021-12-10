@@ -22,7 +22,7 @@ const gitignoreTemplatePath         = path.resolve(orig, 'settings/gitignore-tem
   await modifyPackageJson(packageJsonPath);
   await exec('npm install --ignore-scripts');
   await insertTemplateFiles(templateDir, gitignoreTemplatePath, gitIgnoreTargetPath);
-  //await modifyReadme(readmePath);
+  await modifyReadme(readmePath);
   if(!devMode) {
     await exec('git add . && git commit -m "added autograding setup" --no-verify')
   }
