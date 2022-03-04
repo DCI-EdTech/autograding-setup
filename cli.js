@@ -8,7 +8,6 @@ const argv                          = require(path.resolve(orig, 'lib/yargs'))
 const templateDir                   = path.resolve(orig, 'template');
 const packageJsonPath               = path.resolve(root, 'package.json');
 const readmePath                    = path.resolve(root, 'README.md');
-const { modifyReadme }              = require(path.resolve(orig, 'scripts/modifyReadme'))
 const { insertTemplateFiles }       = require(path.resolve(orig, 'scripts/insertTemplateFiles'))
 const { modifyPackageJson }         = require(path.resolve(orig, 'scripts/modifyPackageJson'))
 const devMode                       = argv.dev;
@@ -22,7 +21,6 @@ const gitignoreTemplatePath         = path.resolve(orig, 'settings/gitignore-tem
   await modifyPackageJson(packageJsonPath);
   await exec('npm install --ignore-scripts');
   await insertTemplateFiles(templateDir, gitignoreTemplatePath, gitIgnoreTargetPath);
-  await modifyReadme(readmePath);
   if(!devMode) {
     await exec('git add . && git commit -m "added autograding setup" --no-verify')
   }
