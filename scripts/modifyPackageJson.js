@@ -15,6 +15,9 @@ exports.modifyPackageJson = async function(packageJsonPath) {
     //"prepare": "npm_config_yes=true npx husky install"
   }, packageJson.scripts);
 
+  // remove preinstall script
+  delete originalPackageJson.scripts.preinstall
+
   // if devMode set up script to restore original packageJson
   if(devMode) {
     Object.assign(packageJson.scripts, {
