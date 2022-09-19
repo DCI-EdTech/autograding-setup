@@ -6,7 +6,7 @@ Script to insert all files and configuration for autograding into exercise repos
 - The **package.json** needs to have
 ```
 "scripts": {
-   "preinstall": "npm_config_yes=true npx github:DCI-EdTech/autograding-setup --no"
+   "preinstall": "npm_config_yes=true npx @dci-edtech/autograding-setup --no"
 }
 ```
 ## What it does
@@ -53,6 +53,6 @@ Modifies eslint settings. 'low' and 'medium' levels turn off several rules to al
 DEV mode is automatically detected by checking where the repo was cloned from. Using the `--dev` option is only necessary to force dev mode in case your repo is not in the `DigitalCareerInstitute` org.
 ```
 "scripts": {
-   "preinstall": "npm_config_yes=true npx github:DCI-EdTech/autograding-setup --no --dev"
+   "preinstall": "npm_config_yes=true npx @dci-edtech/autograding-setup --no --dev"
 }
 ```
