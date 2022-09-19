@@ -1,5 +1,5 @@
 {
-  "name": "autograding-setup",
+  "name": "@dci-edtech/autograding-setup",
   "version": "0.0.1",
   "description": "inserts files and configuration for autograding",
   "homepage": "https://github.com/galymax/autograding-setup",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/piuccio/cowsay.git"
+    "url": "https://github.com/DCI-EdTech/autograding-setup.git"
   },
   "dependencies": {
     "fs-extra": "^10.0.0",
