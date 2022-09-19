@@ -1,6 +1,6 @@
 {
   "name": "@dci-edtech/autograding-setup",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "inserts files and configuration for autograding",
   "homepage": "https://github.com/galymax/autograding-setup",
   "author": {
