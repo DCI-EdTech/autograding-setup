@@ -3,19 +3,15 @@ on:
   release:
     types: [created]
 jobs:
-  publish-to-gpr:
+  publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-          registry-url: https://npm.pkg.github.com/
-      - run: |
-          npm install
-          npm publish
+          node-version: 14
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GPR_PUBLISH_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
